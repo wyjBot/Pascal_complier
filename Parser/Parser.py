@@ -121,14 +121,16 @@ class Parser:
                 'id': p[3],
                 'type': p[5]['info']['true_type'],
                 'value': p[5],
-                'positive': True if p[5]['info']['true_type'] != 'CHAR' and p[5]['info']['value'] > 0 else False
+                'isPositive': True if p[5]['info']['true_type'] != 'CHAR' and p[5]['info']['value'] > 0 else False
             }
             p[0]['st'] = p[1]['st'] + [newST]
             self.isRepeatedDefine(p[3], p.slice[3].lineno, p.slice[3].lexpos)
             if self.isInSubFunc:
                 self.symbolList['subFuncSymbol'][p[3]] = newST.copy()
+                self.symbolList['subFuncSymbol'][p[1]]['isConst'] = True
             else:
                 self.symbolList['curSymbol'][p[3]] = newST.copy()
+                self.symbolList['curSymbol'][p[1]]['isConst'] = True
             if p[4] != '=':
                 self.error.append({
                     'error': 'illegal syntax',
@@ -152,14 +154,16 @@ class Parser:
                 'id': p[1],
                 'type': p[3]['info']['true_type'],
                 'value': p[3],
-                'positive': True if p[3]['info']['true_type'] != 'CHAR' and p[3]['info']['value'] > 0 else False
+                'isPositive': True if p[3]['info']['true_type'] != 'CHAR' and p[3]['info']['value'] > 0 else False
             }
             p[0]['st'] = [newST]
             self.isRepeatedDefine(p[1], p.slice[1].lineno, p.slice[1].lexpos)
             if self.isInSubFunc:
                 self.symbolList['subFuncSymbol'][p[1]] = newST.copy()
+                self.symbolList['subFuncSymbol'][p[1]]['isConst'] = True
             else:
                 self.symbolList['curSymbol'][p[1]] = newST.copy()
+                self.symbolList['curSymbol'][p[1]]['isConst'] = True
             if p[2] != '=':
                 self.error.append({
                     'error': 'illegal syntax',
@@ -256,8 +260,10 @@ class Parser:
                 p[0]['st'] += [newST]
                 if self.isInSubFunc:
                     self.symbolList['subFuncSymbol'][i] = newST.copy()
+                    self.symbolList['subFuncSymbol'][i]['isConst'] = False
                 else:
                     self.symbolList['curSymbol'][i] = newST.copy()
+                    self.symbolList['curSymbol'][i]['isConst'] = False
                 self.idIndex += 1
         else:
             p[0] = {
@@ -285,8 +291,10 @@ class Parser:
                 p[0]['st'] += [newST]
                 if self.isInSubFunc:
                     self.symbolList['subFuncSymbol'][i] = newST.copy()
+                    self.symbolList['subFuncSymbol'][i]['isConst'] = False
                 else:
                     self.symbolList['curSymbol'][i] = newST.copy()
+                    self.symbolList['curSymbol'][i]['isConst'] = False
                 self.idIndex += 1
 
     def p_type(self, p):
@@ -327,7 +335,7 @@ class Parser:
         p[0]['st'] = p[1].upper()
 
     def p_period(self, p):
-        '''period : NUM DOUBLEDOT NUM 
+        '''period : NUM DOUBLEDOT NUM
                   | period ',' NUM DOUBLEDOT NUM'''
         if len(p) == 4:
             # NUM只能为整数
@@ -488,6 +496,8 @@ class Parser:
                 'lexpos': p.slice[2].lexpos
             })
         self.symbolList['funcID'][p[2]] = p[0]['st'].copy()
+        self.symbolList['subFuncSymbol'][p[2]] = p[0]['st'].copy()
+        self.symbolList['subFuncSymbol'][p[2]]['isConst'] = False
         self.idIndex += 1
 
     def p_procedure(self, p):
@@ -608,6 +618,7 @@ class Parser:
             }
             p[0]['st']['varTable'] += [newST]
             self.symbolList['subFuncSymbol'][i] = newST.copy()
+            self.symbolList['subFuncSymbol'][i]['isConst'] = False
             self.idIndex += 1
 
     def p_subprogram_body(self, p):
@@ -691,6 +702,13 @@ class Parser:
                         'line': p.slice[2].lineno,
                         'lexpos': p.slice[2].lexpos
                     })
+                elif self.findSymbol(p[2])['isConst']:
+                    self.error.append({
+                        'error': 'Constant cannot be assigned',
+                        'value': p[2],
+                        'line': p.slice[2].lineno,
+                        'lexpos': p.slice[2].lexpos
+                    })
                 elif p[4]['info']['exp_type'] != 'Undefined' and not self.isSafeAssign(p[4]['info']['exp_type'], self.findSymbol(p[2])['type']):
                     self.warning.append({
                         'warning': 'Unsafe assignment',
@@ -729,15 +747,23 @@ class Parser:
                 }
             }
             if self.findSymbol(p[1]['info']['ID']):
-                var_type = p[1]['info']['var_type']
-                exp_type = p[3]['info']['exp_type']
-                if var_type != 'Undefined' and exp_type != 'Undefined' and not self.isSafeAssign(exp_type, var_type):
-                    self.warning.append({
-                        'warning': 'Unsafe assignment',
-                        'value': exp_type + ' assign to ' + var_type,
+                if self.findSymbol(p[1]['info']['ID'])['isConst']:
+                    self.error.append({
+                        'error': 'Constant cannot be assigned',
+                        'value': p[1]['info']['ID'],
                         'line': p.slice[2].lineno,
                         'lexpos': p.slice[2].lexpos
                     })
+                else:
+                    var_type = p[1]['info']['var_type']
+                    exp_type = p[3]['info']['exp_type']
+                    if exp_type != 'Undefined' and not self.isSafeAssign(exp_type, var_type):
+                        self.warning.append({
+                            'warning': 'Unsafe assignment',
+                            'value': exp_type + ' assign to ' + var_type,
+                            'line': p.slice[2].lineno,
+                            'lexpos': p.slice[2].lexpos
+                        })
         elif p[1]['p_type'] == 'procedure_call':
             p[0] = {
                 'p_length': len(p),
@@ -1085,8 +1111,6 @@ class Parser:
             return self.symbolList['subFuncSymbol'][id]
         elif id in self.symbolList['curSymbol'].keys():
             return self.symbolList['curSymbol'][id]
-        elif id in self.symbolList['funcID'].keys():
-            return self.symbolList['funcID'][id]
         else:
             return False
 
