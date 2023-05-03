@@ -1026,7 +1026,7 @@ class Parser:
                 'child_nodes': [p[3], ],
                 'info': {
                     '_type': 'procedure_id',
-                    'exp_type': self.symbolList['funcID'][p[1]]['type'],
+                    'exp_type': self.symbolList['funcID'][p[1]]['type'] if p[1] in self.symbolList['funcID'].keys() else 'Undefined',
                     'ID': p[1]
                 }
             }
