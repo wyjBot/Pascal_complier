@@ -45,6 +45,7 @@ class Lexer:
     literals = ',;:\'().'  # 字面字符
 
     def __init__(self):
+        self.error = []
         self.data = None
         self.lexer = None
 
@@ -105,14 +106,19 @@ class Lexer:
                 last_cr = -1
             column = token.lexpos - last_cr
             return column
-        print('Lex error at line {} column {}, illegal character {}'.format(t.lineno, getColumn(self.data, t), t.value[0]))
+        self.error.append({
+            'error': 'Lex error',
+            'value': t.value[0],
+            'line': t.lineno,
+            'column': getColumn(self.data, t)
+        })
         t.lexer.skip(1)
 
-    def build(self, **kwargs):
+    def build(self, data, **kwargs):
         self.lexer = lex.lex(module=self, **kwargs)
+        self.data = data
 
     def test(self, data):
-        self.data = data;
         self.lexer.input(data)
         while True:
             tok = self.lexer.token()

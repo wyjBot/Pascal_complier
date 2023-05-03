@@ -8,6 +8,7 @@ class Parser:
     tokens = Lexer.tokens
 
     def __init__(self):
+        self.input = None
         self.symbolList = {'curSymbol': {}, 'subFuncSymbol': {}, 'funcID': {}}
         self.isInSubFunc = False
         self.error = []
@@ -136,7 +137,7 @@ class Parser:
                     'error': 'illegal syntax',
                     'value': p[2],
                     'line': p.slice[2].lineno,
-                    'lexpos': p.slice[2].lexpos
+                    'column': self.getColumn(self.input,  p.slice[2].lexpos)
                 })
             self.idIndex += 1
         else:
@@ -169,7 +170,7 @@ class Parser:
                     'error': 'illegal syntax',
                     'value': p[4],
                     'line': p.slice[4].lineno,
-                    'lexpos': p.slice[4].lexpos
+                    'column': self.getColumn(self.input,  p.slice[4].lexpos)
                 })
             self.idIndex += 1
 
@@ -193,7 +194,7 @@ class Parser:
                     'error': 'illegal syntax',
                     'value': p[1],
                     'line': p.slice[1].lineno,
-                    'lexpos': p.slice[1].lexpos
+                    'column': self.getColumn(self.input,  p.slice[1].lexpos)
                 })
         elif type(p[1]) != str:
             p[0] = {
@@ -344,14 +345,14 @@ class Parser:
                     'error': 'The number representing array bounds should be integer',
                     'value': p[1],
                     'line': p.slice[1].lineno,
-                    'lexpos': p.slice[1].lexpos
+                    'column': self.getColumn(self.input,  p.slice[1].lexpos)
                 })
             if type(p[3]) == float:
                 self.error.append({
                     'error': 'The number representing array bounds should be integer',
                     'value': p[3],
                     'line': p.slice[3].lineno,
-                    'lexpos': p.slice[3].lexpos
+                    'column': self.getColumn(self.input,  p.slice[3].lexpos)
                 })
             # 左边界不能大于右边界
             if p[1] > p[3]:
@@ -359,7 +360,7 @@ class Parser:
                     'error': 'The lower limit cannot be greater than the upper limit',
                     'value': [p[1], p[3]],
                     'line': p.slice[1].lineno,
-                    'lexpos': p.slice[1].lexpos
+                    'column': self.getColumn(self.input,  p.slice[1].lexpos)
                 })
             p[0] = {
                 'p_length': len(p),
@@ -381,14 +382,14 @@ class Parser:
                     'error': 'The number representing array bounds should be integer',
                     'value': p[3],
                     'line': p.slice[3].lineno,
-                    'lexpos': p.slice[3].lexpos
+                    'column': self.getColumn(self.input,  p.slice[3].lexpos)
                 })
             if type(p[5]) == float:
                 self.error.append({
                     'error': 'The number representing array bounds should be integer',
                     'value': p[5],
                     'line': p.slice[5].lineno,
-                    'lexpos': p.slice[5].lexpos
+                    'column': self.getColumn(self.input,  p.slice[5].lexpos)
                 })
             # 左边界不能大于右边界
             if p[3] > p[5]:
@@ -396,7 +397,7 @@ class Parser:
                     'error': 'The lower limit cannot be greater than the upper limit',
                     'value': [p[3], p[5]],
                     'line': p.slice[3].lineno,
-                    'lexpos': p.slice[3].lexpos
+                    'column': self.getColumn(self.input,  p.slice[3].lexpos)
                 })
             p[0] = {
                 'p_length': len(p),
@@ -493,7 +494,7 @@ class Parser:
                 'error': 'Define function_ID repeatedly',
                 'value': p[2],
                 'line': p.slice[2].lineno,
-                'lexpos': p.slice[2].lexpos
+                'column': self.getColumn(self.input,  p.slice[2].lexpos)
             })
         self.symbolList['funcID'][p[2]] = p[0]['st'].copy()
         self.symbolList['subFuncSymbol'][p[2]] = p[0]['st'].copy()
@@ -700,21 +701,21 @@ class Parser:
                         'error': 'Undefined identifier',
                         'value': p[2],
                         'line': p.slice[2].lineno,
-                        'lexpos': p.slice[2].lexpos
+                        'column': self.getColumn(self.input,  p.slice[2].lexpos)
                     })
                 elif self.findSymbol(p[2])['isConst']:
                     self.error.append({
                         'error': 'Constant cannot be assigned',
                         'value': p[2],
                         'line': p.slice[2].lineno,
-                        'lexpos': p.slice[2].lexpos
+                        'column': self.getColumn(self.input,  p.slice[2].lexpos)
                     })
                 elif p[4]['info']['exp_type'] != 'Undefined' and not self.isSafeAssign(p[4]['info']['exp_type'], self.findSymbol(p[2])['type']):
                     self.warning.append({
                         'warning': 'Unsafe assignment',
                         'value': p[4]['info']['exp_type'] + ' assign to ' + self.findSymbol(p[2])['type'],
                         'line': p.slice[2].lineno,
-                        'lexpos': p.slice[2].lexpos
+                        'column': self.getColumn(self.input,  p.slice[2].lexpos)
                     })
             elif p[1].upper() == 'READ':
                 p[0] = {
@@ -752,7 +753,7 @@ class Parser:
                         'error': 'Constant cannot be assigned',
                         'value': p[1]['info']['ID'],
                         'line': p.slice[2].lineno,
-                        'lexpos': p.slice[2].lexpos
+                        'column': self.getColumn(self.input, p.slice[2].lexpos)
                     })
                 else:
                     var_type = p[1]['info']['var_type']
@@ -762,7 +763,7 @@ class Parser:
                             'warning': 'Unsafe assignment',
                             'value': exp_type + ' assign to ' + var_type,
                             'line': p.slice[2].lineno,
-                            'lexpos': p.slice[2].lexpos
+                            'column': self.getColumn(self.input,  p.slice[2].lexpos)
                         })
         elif p[1]['p_type'] == 'procedure_call':
             p[0] = {
@@ -822,7 +823,7 @@ class Parser:
                 'error': 'Undefined identifier',
                 'value': p[1],
                 'line': p.slice[1].lineno,
-                'lexpos': p.slice[1].lexpos
+                'column': self.getColumn(self.input, p.slice[1].lexpos)
             })
         if p[2] is not None:  # 判断若id有下标，id是否为array
             if not self.findSymbol(p[1])['array']['isArray']:
@@ -830,7 +831,7 @@ class Parser:
                     'error': 'subscripted value is not an array',
                     'value': p[1],
                     'line': p.slice[1].lineno,
-                    'lexpos': p.slice[1].lexpos
+                    'column': self.getColumn(self.input,  p.slice[1].lexpos)
                 })
 
     def p_id_varpart(self, p):
@@ -858,6 +859,13 @@ class Parser:
                     'ID': p[1]
                 }
             }
+            if p[1] not in self.symbolList['funcID'].keys():
+                self.error.append({
+                    'error': 'Undefined identifier',
+                    'value': p[1],
+                    'line': p.slice[1].lineno,
+                    'column': self.getColumn(self.input,  p.slice[1].lexpos)
+                })
         else:
             p[0] = {
                 'p_length': len(p),
@@ -1043,7 +1051,7 @@ class Parser:
                     'error': 'illegal syntax',
                     'value': p[1],
                     'line': p.slice[1].lineno,
-                    'lexpos': p.slice[1].lexpos
+                    'column': self.getColumn(self.input,  p.slice[1].lexpos)
                 })
         else:
             p[0] = {
@@ -1073,7 +1081,7 @@ class Parser:
             'error': 'illegal syntax',
             'value': p.value,
             'line': p.lineno,
-            'lexpos': p.lexpos
+            'column': self.getColumn(self.input,  p.lexpos)
         })
 
     def isRepeatedDefine(self, id, line, lexpos):
@@ -1083,7 +1091,7 @@ class Parser:
                     'error': 'Define ID repeatedly',
                     'value': id,
                     'line': line,
-                    'lexpos': lexpos,
+                    'column': self.getColumn(self.input,  lexpos)
                 })
         else:
             if id in self.symbolList['curSymbol'].keys():
@@ -1091,7 +1099,7 @@ class Parser:
                     'error': 'Define ID repeatedly',
                     'value': id,
                     'line': line,
-                    'lexpos': lexpos,
+                    'column': self.getColumn(self.input,  lexpos)
                 })
 
     def getExpType(self, p):
@@ -1127,17 +1135,17 @@ class Parser:
     def errorInProcedureCall(self, p):
         if p[1] not in self.symbolList['funcID'].keys():
             self.error.append({
-                'error': 'Undefined function identifier',
+                'error': 'Undefined identifier',
                 'value': p[1],
                 'line': p.slice[1].lineno,
-                'lexpos': p.slice[1].lexpos
+                'column': self.getColumn(self.input,  p.slice[1].lexpos)
             })
         elif len(p[3]['info']['expressions']) != self.symbolList['funcID'][p[1]]['size']:
             self.error.append({
                 'error': 'The number of parameters does not match in function call',
                 'value': p[1],
                 'line': p.slice[1].lineno,
-                'lexpos': p.slice[1].lexpos
+                'column': self.getColumn(self.input,  p.slice[1].lexpos)
             })
         else:
             for i in range(len(p[3]['info']['expressions'])):
@@ -1148,7 +1156,7 @@ class Parser:
                         'warning': 'Unsafe assignment',
                         'value': str(i) + 'th parameter: ' + var_type + ' assign to ' + para_type,
                         'line': p.slice[1].lineno,
-                        'lexpos': p.slice[1].lexpos
+                        'column': self.getColumn(self.input,  p.slice[1].lexpos)
                     })
                 elif self.symbolList['funcID'][p[1]]['references'][i] and not (
                         p[3]['info']['expressions'][i]['child_nodes'][0]['p_length'] == 2 and
@@ -1159,12 +1167,20 @@ class Parser:
                         'error': 'Unable to call by reference',
                         'value': i,
                         'line': p.slice[1].lineno,
-                        'lexpos': p.slice[1].lexpos
+                        'column': self.getColumn(self.input,  p.slice[1].lexpos)
                     })
 
-    def run(self, data, **kwargs):
+    def getColumn(self, input, lexpos):
+        last_cr = input.rfind('\n', 0, lexpos)
+        if last_cr < 0:
+            last_cr = -1
+        column = lexpos - last_cr
+        return column
+
+    def run(self, input, **kwargs):
+        self.input = input
         lexer = Lexer()
-        lexer.build()
+        lexer.build(input)
         self.parser = yacc.yacc(module=self, **kwargs)
-        ast = self.parser.parse(data)
-        return [ast, self.symbolTable, self.warning, self.error]
+        ast = self.parser.parse(input)
+        return [ast, self.symbolTable, self.warning, lexer.error + self.error]
