@@ -1,0 +1,536 @@
+{
+    "ast": {
+        'p_length': 5,
+        'p_type': "programstruct",
+        "program_head": {
+            'p_length': 6,
+            'p_type': "program_head",
+            "ID": "example",
+            "idlist": {
+                'p_length': 4,
+                'p_type': "idlist",
+                "ids": [
+                    "input",
+                    "output"
+                ]
+            }
+        },
+        "program_body": {
+            'p_length': 5,
+            'p_type': "program_body",
+            "const_declarations": null,
+            "var_declarations": {
+                'p_length': 4,
+                'p_type': "var_declarations",
+                "var_declaration": {
+                    'p_length': 4,
+                    "id": 0,
+                    'p_type': "var_declaration",
+                    "values": [
+                        {
+                            "idlist": {
+                                'p_length': 4,
+                                'p_type': "idlist",
+                                "ids": [
+                                    "x",
+                                    "y"
+                                ]
+                            },
+                            'p_type': {
+                                'p_length': 2,
+                                'p_type': 'p_type',
+                                "_type": {
+                                    'p_type': "basic_type",
+                                    "_type": "INTEGER"
+                                }
+                            }
+                        }
+                    ]
+                }
+            },
+            "subprogram_declarations": {
+                'p_length': 4,
+                'p_type': "subprogram_declarations",
+                "subprograms": [
+                    {
+                        'p_length': 4,
+                        "id": 4,
+                        'p_type': "subprogram",
+                        "subprogram_head": {
+                            'p_length': 7,
+                            'p_type': "subprogram_head",
+                            "_type": "FUNCTION",
+                            "ID": "gcd",
+                            "formal_parameter": {
+                                'p_length': 4,
+                                'p_type': "formal_parameter",
+                                "parameter_list": {
+                                    'p_length': 2,
+                                    'p_type': "parameter_list",
+                                    "parameters": [
+                                        {
+                                            'p_length': 2,
+                                            'p_type': "parameter",
+                                            "value": {
+                                                'p_length': 4,
+                                                'p_type': "value_parameter",
+                                                "idlist": {
+                                                    'p_length': 4,
+                                                    'p_type': "idlist",
+                                                    "ids": [
+                                                        "a",
+                                                        "b"
+                                                    ]
+                                                },
+                                                "basic_type": {
+                                                    'p_type': "basic_type",
+                                                    "_type": "INTEGER"
+                                                }
+                                            }
+                                        }
+                                    ]
+                                }
+                            },
+                            "basic_type": {
+                                'p_type': "basic_type",
+                                "_type": "INTEGER"
+                            }
+                        },
+                        "subprogram_body": {
+                            'p_length': 4,
+                            'p_type': "subprogram_body",
+                            "const_declarations": null,
+                            "var_declarations": null,
+                            "compound_statement": {
+                                'p_length': 4,
+                                'p_type': "compound_statement",
+                                "statement_list": {
+                                    'p_length': 2,
+                                    'p_type': "statement_list",
+                                    "statements": [
+                                        {
+                                            'p_length': 6,
+                                            'p_type': "statement",
+                                            "_type": "IF",
+                                            "expression": {
+                                                'p_length': 4,
+                                                'p_type': "expression",
+                                                "simple_expression_1": {
+                                                    'p_length': 2,
+                                                    'p_type': "simple_expression",
+                                                    "__type": "INTEGER",
+                                                    "term": {
+                                                        'p_length': 2,
+                                                        'p_type': "term",
+                                                        "__type": "INTEGER",
+                                                        "factor": {
+                                                            'p_length': 2,
+                                                            'p_type': "factor",
+                                                            "_type": "variable",
+                                                            "__type": "INTEGER",
+                                                            "variable": {
+                                                                'p_length': 3,
+                                                                'p_type': "variable",
+                                                                "__type": "INTEGER",
+                                                                "ID": "b",
+                                                                "id_varpart": null
+                                                            }
+                                                        }
+                                                    }
+                                                },
+                                                "RELOP": "=",
+                                                "simple_expression_2": {
+                                                    'p_length': 2,
+                                                    'p_type': "simple_expression",
+                                                    "__type": "INTEGER",
+                                                    "term": {
+                                                        'p_length': 2,
+                                                        'p_type': "term",
+                                                        "__type": "INTEGER",
+                                                        "factor": {
+                                                            'p_length': 2,
+                                                            'p_type': "factor",
+                                                            "_type": "NUM",
+                                                            "__type": "INTEGER",
+                                                            "NUM": 0
+                                                        }
+                                                    }
+                                                }
+                                            },
+                                            "statement": {
+                                                'p_length': 4,
+                                                'p_type': "statement",
+                                                "_type": "variable",
+                                                "variable": {
+                                                    'p_length': 3,
+                                                    'p_type': "variable",
+                                                    "__type": "INTEGER",
+                                                    "ID": "gcd",
+                                                    "id_varpart": null
+                                                },
+                                                "ASSIGNOP": ":=",
+                                                "expression": {
+                                                    'p_length': 2,
+                                                    'p_type': "expression",
+                                                    "__type": "INTEGER",
+                                                    "simple_expression": {
+                                                        'p_length': 2,
+                                                        'p_type': "simple_expression",
+                                                        "__type": "INTEGER",
+                                                        "term": {
+                                                            'p_length': 2,
+                                                            'p_type': "term",
+                                                            "__type": "INTEGER",
+                                                            "factor": {
+                                                                'p_length': 2,
+                                                                'p_type': "factor",
+                                                                "_type": "variable",
+                                                                "__type": "INTEGER",
+                                                                "variable": {
+                                                                    'p_length': 3,
+                                                                    'p_type': "variable",
+                                                                    "__type": "INTEGER",
+                                                                    "ID": "a",
+                                                                    "id_varpart": null
+                                                                }
+                                                            }
+                                                        }
+                                                    }
+                                                }
+                                            },
+                                            "else_part": {
+                                                'p_length': 3,
+                                                'p_type': "else_part",
+                                                "statement": {
+                                                    'p_length': 4,
+                                                    'p_type': "statement",
+                                                    "_type": "variable",
+                                                    "variable": {
+                                                        'p_length': 3,
+                                                        'p_type': "variable",
+                                                        "__type": "INTEGER",
+                                                        "ID": "gcd",
+                                                        "id_varpart": null
+                                                    },
+                                                    "ASSIGNOP": ":=",
+                                                    "expression": {
+                                                        'p_length': 2,
+                                                        'p_type': "expression",
+                                                        "__type": "INTEGER",
+                                                        "simple_expression": {
+                                                            'p_length': 2,
+                                                            'p_type': "simple_expression",
+                                                            "__type": "INTEGER",
+                                                            "term": {
+                                                                'p_length': 2,
+                                                                'p_type': "term",
+                                                                "__type": "INTEGER",
+                                                                "factor": {
+                                                                    'p_length': 5,
+                                                                    'p_type': "factor",
+                                                                    "_type": "procedure_id",
+                                                                    "__type": "INTEGER",
+                                                                    "ID": "gcd",
+                                                                    "expression_list": {
+                                                                        'p_length': 4,
+                                                                        'p_type': "expression_list",
+                                                                        "__type": [
+                                                                            "INTEGER",
+                                                                            "INTEGER"
+                                                                        ],
+                                                                        "expressions": [
+                                                                            {
+                                                                                'p_length': 2,
+                                                                                'p_type': "expression",
+                                                                                "__type": "INTEGER",
+                                                                                "simple_expression": {
+                                                                                    'p_length': 2,
+                                                                                    'p_type': "simple_expression",
+                                                                                    "__type": "INTEGER",
+                                                                                    "term": {
+                                                                                        'p_length': 2,
+                                                                                        'p_type': "term",
+                                                                                        "__type": "INTEGER",
+                                                                                        "factor": {
+                                                                                            'p_length': 2,
+                                                                                            'p_type': "factor",
+                                                                                            "_type": "variable",
+                                                                                            "__type": "INTEGER",
+                                                                                            "variable": {
+                                                                                                'p_length': 3,
+                                                                                                'p_type': "variable",
+                                                                                                "__type": "INTEGER",
+                                                                                                "ID": "b",
+                                                                                                "id_varpart": null
+                                                                                            }
+                                                                                        }
+                                                                                    }
+                                                                                }
+                                                                            },
+                                                                            {
+                                                                                'p_length': 2,
+                                                                                'p_type': "expression",
+                                                                                "__type": "INTEGER",
+                                                                                "simple_expression": {
+                                                                                    'p_length': 2,
+                                                                                    'p_type': "simple_expression",
+                                                                                    "__type": "INTEGER",
+                                                                                    "term": {
+                                                                                        'p_length': 4,
+                                                                                        'p_type': "term",
+                                                                                        "term": {
+                                                                                            'p_length': 2,
+                                                                                            'p_type': "term",
+                                                                                            "__type": "INTEGER",
+                                                                                            "factor": {
+                                                                                                'p_length': 2,
+                                                                                                'p_type': "factor",
+                                                                                                "_type": "variable",
+                                                                                                "__type": "INTEGER",
+                                                                                                "variable": {
+                                                                                                    'p_length': 3,
+                                                                                                    'p_type': "variable",
+                                                                                                    "__type": "INTEGER",
+                                                                                                    "ID": "a",
+                                                                                                    "id_varpart": null
+                                                                                                }
+                                                                                            }
+                                                                                        },
+                                                                                        "MULOP": "mod",
+                                                                                        "factor": {
+                                                                                            'p_length': 2,
+                                                                                            'p_type': "factor",
+                                                                                            "_type": "variable",
+                                                                                            "__type": "INTEGER",
+                                                                                            "variable": {
+                                                                                                'p_length': 3,
+                                                                                                'p_type': "variable",
+                                                                                                "__type": "INTEGER",
+                                                                                                "ID": "b",
+                                                                                                "id_varpart": null
+                                                                                            }
+                                                                                        },
+                                                                                        "__type": "INTEGER"
+                                                                                    }
+                                                                                }
+                                                                            }
+                                                                        ]
+                                                                    }
+                                                                }
+                                                            }
+                                                        }
+                                                    }
+                                                }
+                                            }
+                                        }
+                                    ]
+                                }
+                            }
+                        }
+                    }
+                ]
+            },
+            "compound_statement": {
+                'p_length': 4,
+                'p_type': "compound_statement",
+                "statement_list": {
+                    'p_length': 4,
+                    'p_type': "statement_list",
+                    "statements": [
+                        {
+                            'p_length': 5,
+                            'p_type': "statement",
+                            "_type": "READ",
+                            "variable_list": {
+                                'p_length': 4,
+                                'p_type': "variable_list",
+                                "variables": [
+                                    {
+                                        'p_length': 3,
+                                        'p_type': "variable",
+                                        "__type": "INTEGER",
+                                        "ID": "x",
+                                        "id_varpart": null
+                                    },
+                                    {
+                                        'p_length': 3,
+                                        'p_type': "variable",
+                                        "__type": "INTEGER",
+                                        "ID": "y",
+                                        "id_varpart": null
+                                    }
+                                ]
+                            }
+                        },
+                        {
+                            'p_length': 5,
+                            'p_type': "statement",
+                            "_type": "WRITE",
+                            "expression_list": {
+                                'p_length': 2,
+                                'p_type': "expression_list",
+                                "__type": [
+                                    "INTEGER"
+                                ],
+                                "expressions": [
+                                    {
+                                        'p_length': 2,
+                                        'p_type': "expression",
+                                        "__type": "INTEGER",
+                                        "simple_expression": {
+                                            'p_length': 2,
+                                            'p_type': "simple_expression",
+                                            "__type": "INTEGER",
+                                            "term": {
+                                                'p_length': 2,
+                                                'p_type': "term",
+                                                "__type": "INTEGER",
+                                                "factor": {
+                                                    'p_length': 5,
+                                                    'p_type': "factor",
+                                                    "_type": "procedure_id",
+                                                    "__type": "INTEGER",
+                                                    "ID": "gcd",
+                                                    "expression_list": {
+                                                        'p_length': 4,
+                                                        'p_type': "expression_list",
+                                                        "__type": [
+                                                            "INTEGER",
+                                                            "INTEGER"
+                                                        ],
+                                                        "expressions": [
+                                                            {
+                                                                'p_length': 2,
+                                                                'p_type': "expression",
+                                                                "__type": "INTEGER",
+                                                                "simple_expression": {
+                                                                    'p_length': 2,
+                                                                    'p_type': "simple_expression",
+                                                                    "__type": "INTEGER",
+                                                                    "term": {
+                                                                        'p_length': 2,
+                                                                        'p_type': "term",
+                                                                        "__type": "INTEGER",
+                                                                        "factor": {
+                                                                            'p_length': 2,
+                                                                            'p_type': "factor",
+                                                                            "_type": "variable",
+                                                                            "__type": "INTEGER",
+                                                                            "variable": {
+                                                                                'p_length': 3,
+                                                                                'p_type': "variable",
+                                                                                "__type": "INTEGER",
+                                                                                "ID": "x",
+                                                                                "id_varpart": null
+                                                                            }
+                                                                        }
+                                                                    }
+                                                                }
+                                                            },
+                                                            {
+                                                                'p_length': 2,
+                                                                'p_type': "expression",
+                                                                "__type": "INTEGER",
+                                                                "simple_expression": {
+                                                                    'p_length': 2,
+                                                                    'p_type': "simple_expression",
+                                                                    "__type": "INTEGER",
+                                                                    "term": {
+                                                                        'p_length': 2,
+                                                                        'p_type': "term",
+                                                                        "__type": "INTEGER",
+                                                                        "factor": {
+                                                                            'p_length': 2,
+                                                                            'p_type': "factor",
+                                                                            "_type": "variable",
+                                                                            "__type": "INTEGER",
+                                                                            "variable": {
+                                                                                'p_length': 3,
+                                                                                'p_type': "variable",
+                                                                                "__type": "INTEGER",
+                                                                                "ID": "y",
+                                                                                "id_varpart": null
+                                                                            }
+                                                                        }
+                                                                    }
+                                                                }
+                                                            }
+                                                        ]
+                                                    }
+                                                }
+                                            }
+                                        }
+                                    }
+                                ]
+                            }
+                        }
+                    ]
+                }
+            }
+        }
+    },
+    "symbolTable": {
+        "constants": [],
+        "variables": [
+            {
+                "id": 0,
+                "token": "x",
+                'p_type': "INTEGER",
+                "isArray": false,
+                "dimension": 0,
+                "size": [],
+                "start": [],
+                "recordTable": null
+            },
+            {
+                "id": 1,
+                "token": "y",
+                'p_type': "INTEGER",
+                "isArray": false,
+                "dimension": 0,
+                "size": [],
+                "start": [],
+                "recordTable": null
+            }
+        ],
+        "subFunc": [
+            {
+                "id": 4,
+                "token": "gcd",
+                'p_type': "INTEGER",
+                "table": {
+                    "params": 2,
+                    "references": [
+                        false,
+                        false
+                    ],
+                    "constants": [],
+                    "variables": [
+                        {
+                            "id": 2,
+                            "token": "a",
+                            'p_type': "INTEGER",
+                            "isArray": false,
+                            "dimension": 0,
+                            "size": [],
+                            "start": [],
+                            "recordType": null
+                        },
+                        {
+                            "id": 3,
+                            "token": "b",
+                            'p_type': "INTEGER",
+                            "isArray": false,
+                            "dimension": 0,
+                            "size": [],
+                            "start": [],
+                            "recordType": null
+                        }
+                    ]
+                }
+            }
+        ]
+    },
+    "error": [],
+    "warning": []
+}

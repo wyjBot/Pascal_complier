@@ -1184,3 +1184,16 @@ class Parser:
         self.parser = yacc.yacc(module=self, **kwargs)
         ast = self.parser.parse(input)
         return [ast, self.symbolTable, self.warning, lexer.error + self.error]
+
+    
+if __name__ == '__main__':
+    data = open('input.txt').read()
+    m = Parser()
+    import json as js
+    fw=open("input.out","w+")
+    ret=m.run(data)
+    print(type(ret[1]))
+    print(ret[0])
+    js.dump(ret[0],fw,indent=2)
+    fw=open("input.stb","w+")
+    js.dump(ret[1],fw,indent=2)

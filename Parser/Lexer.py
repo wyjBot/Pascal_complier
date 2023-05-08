@@ -127,9 +127,10 @@ class Lexer:
             print(tok)
 
 
+
+
 # if __name__ == '__main__':
 #     data = open('input.txt').read()
-#
 #     m = MyLexer()
 #     m.build()
 #     m.test(data)
