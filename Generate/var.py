@@ -80,7 +80,7 @@ def idlst(node):
     idlist : idlist COM ID | ID
     '''
     assert node['p_type'] == "idlist"
-    result = node["ids"]
+    result = node['info']['ids']
     return result
 
 def const_declarations(node):

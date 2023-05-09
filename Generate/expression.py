@@ -14,9 +14,9 @@ def expression_list(node, array_id="", for_array: bool = False, index_depth=0, r
             if isinstance(array_id, str):
                 func_variable_list = []
                 if domain[-1] == "main":
-                    func_variable_list += symbolTable["variables"]
+                    func_variable_list += symbolTable["varTable"]
                 else:
-                    func_variable_list += symbolTable["variables"]
+                    func_variable_list += symbolTable["varTable"]
                     func_variable_list += get_subFunc(
                         domain[-1])["table"]["variables"]
                 array_info = {}
@@ -27,7 +27,7 @@ def expression_list(node, array_id="", for_array: bool = False, index_depth=0, r
                         array_info = v
                 assert array_info != {}
             elif isinstance(array_id, list):  # for record
-                search_area = symbolTable["variables"]
+                search_area = symbolTable["varTable"]
                 for i in search_area:
                     if i["token"] == array_id[0]:
                         search_area = i["recordTable"]["variables"]

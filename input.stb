@@ -4,7 +4,7 @@
     {
       "idIndex": 0,
       "id": "x",
-      'p_type': "INTEGER",
+      "type": "INTEGER",
       "array": {
         "isArray": false,
         "dimension": 0,
@@ -15,7 +15,7 @@
     {
       "idIndex": 1,
       "id": "y",
-      'p_type': "INTEGER",
+      "type": "INTEGER",
       "array": {
         "isArray": false,
         "dimension": 0,
@@ -28,7 +28,7 @@
     {
       "inIndex": 4,
       "id": "gcd",
-      'p_type': "INTEGER",
+      "type": "INTEGER",
       "size": 2,
       "references": [
         false,
@@ -39,7 +39,7 @@
         {
           "idIndex": 2,
           "id": "a",
-          'p_type': "INTEGER",
+          "type": "INTEGER",
           "array": {
             "isArray": false,
             "dimension": 0,
@@ -50,7 +50,7 @@
         {
           "idIndex": 3,
           "id": "b",
-          'p_type': "INTEGER",
+          "type": "INTEGER",
           "array": {
             "isArray": false,
             "dimension": 0,

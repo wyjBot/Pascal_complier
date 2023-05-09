@@ -73,7 +73,6 @@ class Parser:
             p[0] = {
                 'p_length': len(p),
                 'p_type': 'idlist',
-                'child_nodes': [p[1]],
                 'info': {
                     'id_l': p[1]['info']['id_l'] + [p[3]]
                 }
@@ -1193,7 +1192,4 @@ if __name__ == '__main__':
     fw=open("input.out","w+")
     ret=m.run(data)
     print(type(ret[1]))
-    print(ret[0])
-    js.dump(ret[0],fw,indent=2)
-    fw=open("input.stb","w+")
-    js.dump(ret[1],fw,indent=2)
+    js.dump(ret,fw,indent=2)

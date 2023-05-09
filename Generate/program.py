@@ -56,19 +56,30 @@ def program_body(node):
 #     ast = None  # 抽象语法树
 #     symbolTable = None  # 符号表
 
+def pre_ast(node):
+    if not 'child_nodes' in node: return
+    for x in node['child_nodes']:
+        if not x:continue
+        if not 'p_type' in x: continue
+        node[x['p_type']]=x
+        pre_ast(x)
+    if not 'const_declarations' in node:
+        node['const_declarations']=None
+    del node['child_nodes']
 
 
 def code_generate(_ast, _symbolTable):
     global domain,symbolTable
-    ast=_ast
+    pre_ast(_ast)
+    print(_ast)
     symbolTable.clear()
     symbolTable.update(_symbolTable)  # 符号表
-    result=program_struct(ast)  # 从programstruct节点开始生成目标代码
+    result=program_struct(_ast)  # 从programstruct节点开始生成目标代码
     import optimize
     return optimize.code_format(result)  # 代码格式化
 
 if __name__=="__main__":
-    fr=open("1_example.out")
+    fr=open("input.out")
     data=json.load(fr)
-    result=code_generate(data['ast'],data['symbolTable'])
+    result=code_generate(data[0],data[1])
     print(result)
