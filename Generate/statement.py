@@ -1,4 +1,4 @@
-from expression import *
+from Generate.expression import *
 def compound_statement(node):
     '''
     compound_statement -> begin statement_list end

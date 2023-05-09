@@ -1,4 +1,4 @@
-from subProgram import *
+from Generate.subProgram import *
 
 def program_struct(ast):
     global domain
@@ -78,8 +78,8 @@ def code_generate(_ast, _symbolTable):
     symbolTable.clear()
     symbolTable.update(_symbolTable)  # 符号表
     result=program_struct(_ast)  # 从programstruct节点开始生成目标代码
-    import optimize
-    return optimize.code_format(result)  # 代码格式化
+    import Generate.optimize
+    return Generate.optimize.code_format(result)  # 代码格式化
 
 if __name__=="__main__":
     fr=open("../input.out_const")

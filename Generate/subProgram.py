@@ -1,4 +1,4 @@
-from statement import *
+from Generate.statement import *
 def subprogram_declarations(node):
     '''
     subprogram_declarations : subprogram_declarations subprogram SEMICOLON

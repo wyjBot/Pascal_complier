@@ -1,4 +1,4 @@
-from var import *
+from Generate.var import *
 def expression_list(node, array_id="", for_array: bool = False, index_depth=0, return_list=False, for_procedure_call: bool = False, procedure_id: str = "", ardepth=0):
     global symbolTable,domain
     """

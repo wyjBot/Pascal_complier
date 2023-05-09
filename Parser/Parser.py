@@ -1,5 +1,5 @@
 import ply.yacc as yacc
-from Lexer import Lexer
+from Parser.Lexer import Lexer
 
 
 class Parser:
