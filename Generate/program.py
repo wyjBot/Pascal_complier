@@ -45,15 +45,6 @@ def program_body(node):
     return result
 
 
-# <---------------------------------分割线------------------------------------>
-# def reset_generator():
-#     targetCode = ''  # 目标代码
-#     domain = []  # 作用域栈
-#     headFile = []  # 头文件
-#     f_stdio = False  # stdio存在标识
-#     f_stdbool = False  # stdbool存在标识
-#     ast = None  # 抽象语法树
-#     symbolTable = None  # 符号表
 
 # def pre_ast(node):
 #     if not 'child_nodes' in node: return
@@ -72,8 +63,7 @@ def program_body(node):
 
 def code_generate(_ast, _symbolTable):
     global domain,symbolTable
-    # pre_ast(_ast)
-    print(_ast)
+    # pre_ast(_ast) # print(_ast)
     symbolTable.clear()
     symbolTable.update(_symbolTable)  # 符号表
     result=program_struct(_ast)  # 从programstruct节点开始生成目标代码
@@ -81,7 +71,7 @@ def code_generate(_ast, _symbolTable):
     return Generate.optimize.code_format(result)  # 代码格式化
 
 if __name__=="__main__":
-    fr=open("../input.out_const")
+    fr=open("./test/input.txt")
     data=json.load(fr)
     result=code_generate(data[0],data[1])
     print(result)
