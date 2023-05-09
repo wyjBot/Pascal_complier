@@ -125,10 +125,10 @@ class Parser:
             self.isRepeatedDefine(p[3], p.slice[3].lineno, p.slice[3].lexpos)
             if self.isInSubFunc:
                 self.symbolList['subFuncSymbol'][p[3]] = newST.copy()
-                self.symbolList['subFuncSymbol'][p[1]]['isConst'] = True
+                self.symbolList['subFuncSymbol'][p[3]]['isConst'] = True
             else:
                 self.symbolList['curSymbol'][p[3]] = newST.copy()
-                self.symbolList['curSymbol'][p[1]]['isConst'] = True
+                self.symbolList['curSymbol'][p[3]]['isConst'] = True
             if p[4] != '=':
                 self.error.append({
                     'error': 'illegal syntax',
@@ -325,7 +325,7 @@ class Parser:
                     '_type': 'ARRAY',
                 }
             }
-            p[0]['SymbolTable'] = {
+            p[0]['st'] = {
                 'type': p[6]['st'],
                 'array': {
                     'isArray': True,
@@ -1202,10 +1202,10 @@ class Parser:
 
     
 if __name__ == '__main__':
-    data = open('input.txt').read()
+    data = open('../input.txt').read()
     m = Parser()
     import json as js
-    fw=open("input.out","w+")
+    fw=open("../input.out_const", "w+")
     ret=m.run(data)
     print(type(ret[1]))
     js.dump(ret,fw,indent=2)

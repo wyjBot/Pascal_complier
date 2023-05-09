@@ -42,7 +42,7 @@ class Lexer:
 
     t_ignore = ' \t'  # 忽略字符
 
-    literals = ',;:\'().'  # 字面字符
+    literals = ',;:\'().[]'  # 字面字符
 
     def __init__(self):
         self.error = []
@@ -118,8 +118,8 @@ class Lexer:
         self.lexer = lex.lex(module=self, **kwargs)
         self.data = data
 
-    def test(self, data):
-        self.lexer.input(data)
+    def test(self):
+        self.lexer.input(self.data)
         while True:
             tok = self.lexer.token()
             if not tok:

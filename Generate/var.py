@@ -10,50 +10,12 @@ def Ptype(node):
         | ARRAY LBRACKET period RBRACKET OF basic_type
         | RECORD multype END
     '''
-    assert node['p_type'] == 'p_type'
+    assert node['p_type'] == 'type'
     result = ''
-    if node["_type"] == "ARRAY":
-        result += basic_type(node["basic_type"])
-    elif node["_type"] == "RECORD":
-        pass
+    if node['info']["_type"] == "ARRAY":
+        result += basic_type(node['child_nodes'][1])
     else:
-        result += basic_type(node["_type"])
-    return result
-
-
-
-def multype(node):
-    '''
-    multype : multype idlist COLON type SEMICOLON
-            | idlist COLON type SEMICOLON
-    '''
-    assert node['p_type'] == "multype"
-    result = ''
-    for it in node["values"]:
-        if it['p_type']["_type"] == "ARRAY":
-            result += Ptype(it['p_type'])
-            result += ' '
-            range = period(it['p_type']["period"])
-            idlist = idlst(it["idlist"])
-            for id in idlist:
-                result += id
-                result += range
-                result += ',' if id != idlist[-1] else ';'
-        elif it['p_type']["_type"] == "RECORD":
-            result += 'struct ' + '{'
-            result += multype(it['p_type']["multype"])
-            result += '}'
-            idlist = idlst(it["idlist"])
-            for id in idlist:
-                result += id
-                result += ',' if id != idlist[-1] else ';'
-        else:
-            result += Ptype(it['p_type'])
-            result += ' '
-            idlist = idlst(it["idlist"])
-            for id in idlist:
-                result += id
-                result += ',' if id != idlist[-1] else ';'
+        result += basic_type(node['info']["_type"])
     return result
 
 def basic_type(node):
@@ -65,13 +27,13 @@ def basic_type(node):
     '''
     global headFile
     assert node['p_type'] == "basic_type"
-    if node["_type"] == "INTEGER":
+    if node["info"]["_type"] == "INTEGER":
         return "int"
-    if node["_type"] == "REAL":
+    if node["info"]["_type"] == "REAL":
         return "float"
-    if node["_type"] == "BOOLEAN":
+    if node["info"]["_type"] == "BOOLEAN":
         return "bool"
-    if node["_type"] == "CHAR":
+    if node["info"]["_type"] == "CHAR":
         return "char"
 
 
@@ -80,7 +42,7 @@ def idlst(node):
     idlist : idlist COM ID | ID
     '''
     assert node['p_type'] == "idlist"
-    result = node['info']['ids']
+    result = node['info']['id_l']
     return result
 
 def const_declarations(node):
@@ -89,9 +51,9 @@ def const_declarations(node):
                         | empty
     '''
     result = ""
-    if node is not None:
+    if 'p_type' in node.keys():
         assert node['p_type'] == "const_declarations"
-        result += const_declaration(node["const_declaration"])
+        result += const_declaration(node["child_nodes"][0])
         result += '\n'
     return result
 
@@ -102,14 +64,14 @@ def const_declaration(node):
     '''
     assert node['p_type'] == "const_declaration"
     result = ""
-    for it in node["values"]:
+    for it in node['info']["values"]:
         result += 'const '
-        if it["const_value"]["_type"] == "NUM":
-            if isinstance(it["const_value"]["value"], int):
+        if it["const_value"]['info']["_type"] == "NUM":
+            if isinstance(it["const_value"]['info']["value"], int):
                 result += 'int '
-            if isinstance(it["const_value"]["value"], float):
+            if isinstance(it["const_value"]['info']["value"], float):
                 result += 'float '
-        if it["const_value"]["_type"] == "LETTER":
+        if it["const_value"]['info']["_type"] == "LETTER":
             result += 'char '
         result += it["ID"] + ' = '
         result += const_value(it["const_value"])
@@ -122,10 +84,10 @@ def const_value(node):
     '''
     assert node['p_type'] == "const_value"
     result = ''
-    if node["_type"] == "NUM":
-        result += str(node["value"])
-    if node["_type"] == "LETTER":
-        result += '\'' + node["value"] + '\''
+    if node['info']["_type"] == "NUM":
+        result += str(node['info']["value"])
+    if node['info']["_type"] == "LETTER":
+        result += '\'' + node['info']["value"] + '\''
     return result
 
 def var_declarations(node):
@@ -134,9 +96,9 @@ def var_declarations(node):
                     |
     '''
     result = ''
-    if node is not None:
+    if 'p_type' in node.keys():
         assert node['p_type'] == "var_declarations"
-        result += var_declaration(node["var_declaration"])
+        result += var_declaration(node["child_nodes"][0])
         result += '\n'
     return result
 
@@ -147,28 +109,20 @@ def var_declaration(node):
     '''
     assert node['p_type'] == "var_declaration"
     result = ''
-    for it in node["values"]:
-        if it['p_type']["_type"] == "ARRAY":
-            result += Ptype(it['p_type'])
+    for it in node['info']["values"]:
+        if it['type']['info']["_type"] == "ARRAY":
+            result += Ptype(it['type'])
             result += ' '
-            range = period(it['p_type']["period"])
-            idlist = idlst(it["idlist"])
+            range = period(it['type']["child_nodes"][0])
+            idlist = idlst(it["id_l"])
             for id in idlist:
                 result += id
                 result += range
                 result += ',' if id != idlist[-1] else ';'
-        elif it['p_type']["_type"] == "RECORD":
-            result += 'struct ' + '{'
-            result += multype(it['p_type']["multype"])
-            result += '}'
-            idlist = idlst(it["idlist"])
-            for id in idlist:
-                result += id
-                result += ',' if id != idlist[-1] else ';'
         else:
-            result += Ptype(it['p_type'])
+            result += Ptype(it['type'])
             result += ' '
-            idlist = idlst(it["idlist"])
+            idlist = idlst(it["id_l"])
             for id in idlist:
                 result += id
                 result += ',' if id != idlist[-1] else ';'
@@ -182,7 +136,7 @@ def period(node):
     '''
     assert node['p_type'] == "period"
     result = ''
-    for period in node["values"]:
+    for period in node['info']["values"]:
         size = period["end"]-period["start"]+1
         result += '['+str(size)+']'
     return result

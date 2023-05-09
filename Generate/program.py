@@ -10,8 +10,8 @@ def program_struct(ast):
     domain += ["global"]
     if node is not None:
         assert node['p_type'] == "programstruct"
-        result += program_head(node["program_head"])
-        result += program_body(node["program_body"])
+        result += program_head(node["child_nodes"][0])
+        result += program_body(node["child_nodes"][1])
     else:
         result += '/* Error, Parser gives no AST. */'
     domain.pop()
@@ -34,14 +34,14 @@ def program_body(node):
     global domain
     assert node['p_type'] == "program_body"
     result = ""
-    result += const_declarations(node["const_declarations"])
-    result += var_declarations(node["var_declarations"])
+    result += const_declarations(node["child_nodes"][0])
+    result += var_declarations(node["child_nodes"][1])
     result += subprogram_declarations(
-        node["subprogram_declarations"])
+        node["child_nodes"][2])
     result += "int main(int argc,char* argv[])"
     domain += ["main"]
     result += '{'
-    result += compound_statement(node["compound_statement"])
+    result += compound_statement(node["child_nodes"][3])
     result += '}'
     return result
 
@@ -56,24 +56,24 @@ def program_body(node):
 #     ast = None  # 抽象语法树
 #     symbolTable = None  # 符号表
 
-def pre_ast(node):
-    if not 'child_nodes' in node: return
-    if node['p_type']=="var_declaration":
-        node['values']=node['child_nodes']
-        node['child_nodes']={}
-    for x in node['child_nodes']:
-        if not x:continue
-        if not 'p_type' in x: continue
-        node[x['p_type']]=x
-        pre_ast(x)
-    if not 'const_declarations' in node:
-        node['const_declarations']=None
-    del node['child_nodes']
+# def pre_ast(node):
+#     if not 'child_nodes' in node: return
+#     if node['p_type'] == 'subprograms':
+#         for i in node['info']['subprograms']:
+#
+#     for x in node['child_nodes']:
+#         if not x:continue
+#         if not 'p_type' in x: continue
+#         node[x['p_type']]=x
+#         pre_ast(x)
+#     if not 'const_declarations' in node:
+#         node['const_declarations']=None
+#     del node['child_nodes']
 
 
 def code_generate(_ast, _symbolTable):
     global domain,symbolTable
-    pre_ast(_ast)
+    # pre_ast(_ast)
     print(_ast)
     symbolTable.clear()
     symbolTable.update(_symbolTable)  # 符号表
@@ -82,7 +82,7 @@ def code_generate(_ast, _symbolTable):
     return optimize.code_format(result)  # 代码格式化
 
 if __name__=="__main__":
-    fr=open("input.out")
+    fr=open("../input.out_const")
     data=json.load(fr)
     result=code_generate(data[0],data[1])
     print(result)

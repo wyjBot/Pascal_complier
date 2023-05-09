@@ -6,7 +6,7 @@ def compound_statement(node):
     '''
     assert node['p_type'] == "compound_statement"
     result = ""
-    result += statement_list(node["statement_list"])
+    result += statement_list(node["child_nodes"][0])
     return result
 
 def statement_list(node):
@@ -16,12 +16,12 @@ def statement_list(node):
     '''
     assert node['p_type'] == "statement_list", "type:{}".format(node['p_type'])
     result = ""
-    assert len(node["statements"]) > 0
-    if len(node["statements"]) == 1:
-        result += statement(node["statements"][0])
-    elif len(node["statements"]) > 1:
+    assert len(node['info']["statements"]) > 0
+    if len(node['info']["statements"]) == 1:
+        result += statement(node['info']["statements"][0])
+    elif len(node['info']["statements"]) > 1:
         tmp_node = copy.deepcopy(node)
-        state = tmp_node["statements"].pop()
+        state = tmp_node['info']["statements"].pop()
         result += statement_list(tmp_node)
         # result += " "
         result += statement(state)
@@ -44,49 +44,49 @@ def statement(node):
     global domain
     if(node == None):
         return ""
-    assert node["_type"] in ["variable", "procedure_call", "compound_statement",
-                                "IF", "FOR", "READ", "WRITE", "WHILE"], "_type:{}".format(node["_type"])
+    assert node['info']["_type"] in ["variable", "procedure_call", "compound_statement",
+                                "IF", "FOR", "READ", "WRITE", "WHILE"], "_type:{}".format(node['info']["_type"])
     format_tamap = {"INTEGER": "%d",
                         "REAL": "%f", "BOOLEAN": "%d", "CHAR": "%c"}
-    type = node["_type"]
+    type = node['info']["_type"]
     result = ""
     if type == "variable":
-        result += variable(node["variable"])[0]
+        result += variable(node["child_nodes"][0])[0]
         if result == domain[-1]:
             # in function
             result = "return "
         else:
             result += " = "
-        result += expression(node["expression"])
+        result += expression(node["child_nodes"][1])
     elif type == "procedure_call":
-        result += procedure_call(node["procedure_call"])
+        result += procedure_call(node["child_nodes"][0])
     elif type == "compound_statement":
-        result += compound_statement(node["compound_statement"])
+        result += compound_statement(node["child_nodes"][0])
     elif type == "IF":
         result += "if("
-        result += expression(node["expression"])
+        result += expression(node["child_nodes"][0])
         result += ")"
         result += "{"
-        result += statement(node["statement"])
+        result += statement(node["child_nodes"][1])
         result += "}"
-        result += else_part(node["else_part"])
+        result += else_part(node["child_nodes"][2])
     elif type == "FOR":
         result += "for("
-        result += node["ID"]
+        result += node['info']["ID"]
         result += " = "
-        result += expression(node["expression"])
+        result += expression(node["child_nodes"][0])
         result += ";"
         result += node["ID"]
         result += " < "
-        result += expression(node["to_expression"])
+        result += expression(node["child_nodes"][1])
         result += ";"
         result += node["ID"]
         result += "++"
         result += "){"
-        result += statement(node["statement"])
+        result += statement(node["child_nodes"][2])
         result += "}"
     elif type == "READ":
-        var, __type = variable_list(node["variable_list"])
+        var, __type = variable_list(node["child_nodes"][0])
         var = var.split(",")
         assert len(var) == len(__type)
         assert len(var) > 0
@@ -99,8 +99,8 @@ def statement(node):
         result += "scanf(\"{}\",{})".format(format_string, var_string)
     elif type == "WRITE":
         var = expression_list(
-            node["expression_list"], return_list=True)
-        __type = node["expression_list"]["__type"]
+            node["child_nodes"][0], return_list=True)
+        __type = node["child_nodes"][0]["info"]["exp_type"]
         assert len(var) == len(__type), len(var)
         assert len(var) > 0
         format_string = ""
@@ -111,9 +111,6 @@ def statement(node):
             var_string += "{},".format(var[i])
         var_string = var_string[0: -1]
         result += "printf(\"{}\",{})".format(format_string, var_string)
-    elif type == "WHILE":
-        result = "while({}){{{}}}".format(expression(node["expression"]),
-                                            statement(node["statement"]))
     if type in ["variable", "procedure_call", "READ", "WRITE"]:
         result += ";"
     return result
@@ -139,6 +136,6 @@ def else_part(node):
     result = ""
     if node['p_length'] == 3:
         result += "else{"
-        result += statement(node["statement"])
+        result += statement(node["child_nodes"][0])
         result += "}"
     return result

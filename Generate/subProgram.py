@@ -7,7 +7,7 @@ def subprogram_declarations(node):
     result = ''
     if node is not None:
         assert node['p_type'] == "subprogram_declarations"
-        for it in node["subprograms"]:
+        for it in node['info']["subprograms"]:
             result += subprogram(it)
             result += '\n'
     return result
@@ -18,8 +18,8 @@ def subprogram(node):
     '''
     assert node['p_type'] == "subprogram"
     result = ''
-    result += subprogram_head(node["subprogram_head"])
-    result += subprogram_body(node["subprogram_body"])
+    result += subprogram_head(node["child_nodes"][0])
+    result += subprogram_body(node["child_nodes"][1])
     domain.pop()
     return result
 
@@ -31,13 +31,13 @@ def subprogram_head(node):
     global domain
     assert node['p_type'] == "subprogram_head"
     result = ''
-    if node["_type"] == 'PROCEDURE':
+    if node['info']["_type"] == 'PROCEDURE':
         result += 'void '
     else:
-        result += basic_type(node["basic_type"]) + ' '
-    result += node["ID"]
-    domain += [node["ID"]]
-    result += formal_parameter(node["formal_parameter"])
+        result += basic_type(node["child_nodes"][1]) + ' '
+    result += node['info']["ID"]
+    domain += [node['info']["ID"]]
+    result += formal_parameter(node["child_nodes"][0])
     return result
 
 def formal_parameter(node):
@@ -47,9 +47,9 @@ def formal_parameter(node):
     '''
     result = ''
     result += '('
-    if node is not None:
+    if 'p_type' in node.keys():
         assert node['p_type'] == "formal_parameter"
-        result += parameter_list(node["parameter_list"])
+        result += parameter_list(node["child_nodes"][0])
     result += ')'
     return result
 
@@ -60,9 +60,9 @@ def parameter_list(node):
     '''
     assert node['p_type'] == "parameter_list"
     result = ''
-    for it in node["parameters"]:
+    for it in node['info']["parameters"]:
         result += parameter(it)
-        result += ','if it != node["parameters"][-1] else ''
+        result += ','if it != node['info']["parameters"][-1] else ''
     return result
 
 def parameter(node):
@@ -72,10 +72,10 @@ def parameter(node):
     '''
     assert node['p_type'] == "parameter"
     result = ''
-    if node["value"]['p_type'] == "value_parameter":
-        result += value_parameter(node["value"])
+    if node['info']["value"]['p_type'] == "value_parameter":
+        result += value_parameter(node['info']["value"])
     else:
-        result += var_parameter(node["value"])
+        result += var_parameter(node['info']["value"])
     return result
 
 def var_parameter(node):
@@ -98,8 +98,8 @@ def value_parameter(node):
     '''
     assert node['p_type'] == "value_parameter"
     result = ''
-    type = basic_type(node["basic_type"])
-    idlist = idlst(node["idlist"])
+    type = basic_type(node["child_nodes"][1])
+    idlist = idlst(node["child_nodes"][0])
     for id in idlist:
         result += type + ' '
         result += id
@@ -113,8 +113,8 @@ def subprogram_body(node):
     assert node['p_type'] == "subprogram_body"
     result = ""
     result += '{'
-    result += const_declarations(node["const_declarations"])
-    result += var_declarations(node["var_declarations"])
-    result += compound_statement(node["compound_statement"])
+    result += const_declarations(node["child_nodes"][0])
+    result += var_declarations(node["child_nodes"][1])
+    result += compound_statement(node["child_nodes"][2])
     result += '}'
     return result
