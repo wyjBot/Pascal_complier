@@ -1,45 +1,45 @@
 
-# 代码格式化：添加换行、缩进
-def code_format(targetCode):
+def code_format(srcCode):
+        ''' 格式美化：添加换行 缩进'''
         indent = 0
-        in_quote = False
         in_small = 0
         add_indent = False
-        code_list = list(targetCode)
-        for i in range(0, len(code_list)-1):
+        in_quote = False
+        lines = list(srcCode)
+        for i in range(0, len(lines)-1):
             add_indent = False
-            if code_list[i] == '&' and code_list[i+1] == '*':
-                code_list[i] = ''
-                code_list[i+1] = ''
-            if code_list[i:i+2] == '*' and code_list[i+1] == '&':
-                code_list[i] = ''
-                code_list[i+1] = ''
-            if code_list[i] in [',', ';']:
-                code_list[i] += ' '
-            if code_list[i] == '\"' or code_list[i] == '\'':
+            if lines[i] == '&' and lines[i+1] == '*':
+                lines[i] = ''
+                lines[i+1] = ''
+            if lines[i:i+2] == '*' and lines[i+1] == '&':
+                lines[i] = ''
+                lines[i+1] = ''
+            if lines[i] in [',', ';']:
+                lines[i] += ' '
+            if lines[i] == '\"' or lines[i] == '\'':
                 in_quote = ~in_quote
-            if code_list[i] == '(':
+            if lines[i] == '(':
                 in_small += 1
-            if code_list[i] == ')':
+            if lines[i] == ')':
                 in_small -= 1
             if in_quote == False and in_small == 0:
-                if code_list[i] == '{':
-                    code_list[i] += '\n'
+                if lines[i] == '{':
+                    lines[i] += '\n'
                     indent += 1
                     add_indent = True
-                if code_list[i] == '}\n':
+                if lines[i] == '}\n':
                     add_indent = True
-                if code_list[i] == '; ':
-                    code_list[i] += '\n'
+                if lines[i] == '; ':
+                    lines[i] += '\n'
                     add_indent = True
-                if code_list[i] == '\n':
+                if lines[i] == '\n':
                     add_indent = True
-                if code_list[i+1] == '}':
-                    code_list[i+1] += '\n'
+                if lines[i+1] == '}':
+                    lines[i+1] += '\n'
                     indent -= 1
                     add_indent = True
             if add_indent == True:
                 for j in range(0, indent):
-                    code_list[i] += '\t'
-        targetCode = ''.join(code_list)
-        return targetCode
+                    lines[i] += '\t'
+        tgtCode = ''.join(lines)
+        return tgtCode
