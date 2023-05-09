@@ -274,10 +274,10 @@ def id_varpart(node, array_id=""):
         return result
 
 
-def get_subFunc(subfunctoken=""):
+def get_subFunc(subfuncId=""):
     global symbolTable
     # print(subfunctoken)
     for i in symbolTable["subFunc"]:
-        if i["token"] == subfunctoken:
+        if i["id"] == subfuncId:
             return i
-    exit("\"{}\" doesn't exist in symbol table".format(subfunctoken))
+    exit("\"{}\" doesn't exist in symbol table".format(subfuncId))

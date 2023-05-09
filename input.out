@@ -240,7 +240,7 @@
                                     ],
                                     "info": {},
                                     "st": {
-                                      "references": [
+                                      "isReference": [
                                         false,
                                         false
                                       ],
@@ -299,7 +299,7 @@
                                     ],
                                     "info": {},
                                     "st": {
-                                      "references": [
+                                      "isReference": [
                                         false,
                                         false
                                       ],
@@ -332,7 +332,7 @@
                                   }
                                 },
                                 "st": {
-                                  "references": [
+                                  "isReference": [
                                     false,
                                     false
                                   ],
@@ -396,7 +396,7 @@
                                       ],
                                       "info": {},
                                       "st": {
-                                        "references": [
+                                        "isReference": [
                                           false,
                                           false
                                         ],
@@ -455,7 +455,7 @@
                                       ],
                                       "info": {},
                                       "st": {
-                                        "references": [
+                                        "isReference": [
                                           false,
                                           false
                                         ],
@@ -488,7 +488,7 @@
                                     }
                                   },
                                   "st": {
-                                    "references": [
+                                    "isReference": [
                                       false,
                                       false
                                     ],
@@ -523,7 +523,7 @@
                             },
                             "st": {
                               "size": 2,
-                              "references": [
+                              "isReference": [
                                 false,
                                 false
                               ],
@@ -557,7 +557,7 @@
                         "info": {},
                         "st": {
                           "size": 2,
-                          "references": [
+                          "isReference": [
                             false,
                             false
                           ],
@@ -606,7 +606,7 @@
                       "id": "gcd",
                       "type": "INTEGER",
                       "size": 2,
-                      "references": [
+                      "isReference": [
                         false,
                         false
                       ],
@@ -1779,7 +1779,7 @@
                   "id": "gcd",
                   "type": "INTEGER",
                   "size": 2,
-                  "references": [
+                  "isReference": [
                     false,
                     false
                   ],
@@ -1859,7 +1859,7 @@
                                       ],
                                       "info": {},
                                       "st": {
-                                        "references": [
+                                        "isReference": [
                                           false,
                                           false
                                         ],
@@ -1918,7 +1918,7 @@
                                       ],
                                       "info": {},
                                       "st": {
-                                        "references": [
+                                        "isReference": [
                                           false,
                                           false
                                         ],
@@ -1951,7 +1951,7 @@
                                     }
                                   },
                                   "st": {
-                                    "references": [
+                                    "isReference": [
                                       false,
                                       false
                                     ],
@@ -2015,7 +2015,7 @@
                                         ],
                                         "info": {},
                                         "st": {
-                                          "references": [
+                                          "isReference": [
                                             false,
                                             false
                                           ],
@@ -2074,7 +2074,7 @@
                                         ],
                                         "info": {},
                                         "st": {
-                                          "references": [
+                                          "isReference": [
                                             false,
                                             false
                                           ],
@@ -2107,7 +2107,7 @@
                                       }
                                     },
                                     "st": {
-                                      "references": [
+                                      "isReference": [
                                         false,
                                         false
                                       ],
@@ -2142,7 +2142,7 @@
                               },
                               "st": {
                                 "size": 2,
-                                "references": [
+                                "isReference": [
                                   false,
                                   false
                                 ],
@@ -2176,7 +2176,7 @@
                           "info": {},
                           "st": {
                             "size": 2,
-                            "references": [
+                            "isReference": [
                               false,
                               false
                             ],
@@ -2225,7 +2225,7 @@
                         "id": "gcd",
                         "type": "INTEGER",
                         "size": 2,
-                        "references": [
+                        "isReference": [
                           false,
                           false
                         ],
@@ -3398,7 +3398,7 @@
                     "id": "gcd",
                     "type": "INTEGER",
                     "size": 2,
-                    "references": [
+                    "isReference": [
                       false,
                       false
                     ],
@@ -3437,7 +3437,7 @@
                 "id": "gcd",
                 "type": "INTEGER",
                 "size": 2,
-                "references": [
+                "isReference": [
                   false,
                   false
                 ],
@@ -5046,7 +5046,7 @@
               "id": "gcd",
               "type": "INTEGER",
               "size": 2,
-              "references": [
+              "isReference": [
                 false,
                 false
               ],
@@ -5114,7 +5114,7 @@
         "id": "gcd",
         "type": "INTEGER",
         "size": 2,
-        "references": [
+        "isReference": [
           false,
           false
         ],

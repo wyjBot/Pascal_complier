@@ -58,6 +58,9 @@ def program_body(node):
 
 def pre_ast(node):
     if not 'child_nodes' in node: return
+    if node['p_type']=="var_declaration":
+        node['values']=node['child_nodes']
+        node['child_nodes']={}
     for x in node['child_nodes']:
         if not x:continue
         if not 'p_type' in x: continue
