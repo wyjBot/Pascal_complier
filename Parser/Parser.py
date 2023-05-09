@@ -1,8 +1,6 @@
 import ply.yacc as yacc
 from Lexer import Lexer
 
-start = 'programstruct'
-
 
 class Parser:
     tokens = Lexer.tokens
@@ -318,6 +316,24 @@ class Parser:
                     'start': [],
                 }
             }
+        else:
+            p[0] = {
+                'p_length': len(p),
+                'p_type': 'type',
+                'child_nodes': [p[3], p[6]],
+                'info': {
+                    '_type': 'ARRAY',
+                }
+            }
+            p[0]['SymbolTable'] = {
+                'type': p[6]['st'],
+                'array': {
+                    'isArray': True,
+                    'dimension': p[3]['st']['dimension'],
+                    'size': p[3]['st']['size'],
+                    'start': p[3]['st']['start'],
+                }
+            }
 
     def p_basic_type(self, p):
         '''basic_type : INTEGER
@@ -444,7 +460,7 @@ class Parser:
             'id': p[1]['st']['id'],
             'type': p[1]['st']['type'],
             'size': p[1]['st']['size'],
-            'references': p[1]['st']['references'],
+            'isReference': p[1]['st']['isReference'],
             'constTable': p[3]['st']['constTable'],
             'varTable': p[1]['st']['varTable'] + p[3]['st']['varTable']
         }
@@ -467,7 +483,7 @@ class Parser:
                 'id': p[2],
                 'type': None,
                 'size': p[3]['st']['size'],
-                'references': p[3]['st']['references'],
+                'isReference': p[3]['st']['isReference'],
                 'varTable': p[3]['st']['varTable']
             }
         else:
@@ -485,7 +501,7 @@ class Parser:
                 'id': p[2],
                 'type': p[5]['st'],
                 'size': p[3]['st']['size'],
-                'references': p[3]['st']['references'],
+                'isReference': p[3]['st']['isReference'],
                 'varTable': p[3]['st']['varTable']
             }
         if p[2] in self.symbolList['funcID'].keys():
@@ -522,13 +538,13 @@ class Parser:
             }
             p[0]['st'] = {
                 'size': p[2]['st']['size'],
-                'references': p[2]['st']['references'],
+                'isReference': p[2]['st']['isReference'],
                 'varTable': p[2]['st']['varTable']
             }
         else:
             p[0] = {'st': {
                 'size': None,
-                'references': None,
+                'isReference': None,
                 'varTable': None
             }}
 
@@ -546,7 +562,7 @@ class Parser:
             }
             p[0]['st'] = {
                 'size': p[1]['st']['size'] + p[3]['st']['size'],
-                'references': p[1]['st']['references'] + p[3]['st']['references'],
+                'isReference': p[1]['st']['isReference'] + p[3]['st']['isReference'],
                 'varTable': p[1]['st']['varTable'] + p[3]['st']['varTable']
             }
         else:
@@ -560,7 +576,7 @@ class Parser:
             }
             p[0]['st'] = {
                 'size': p[1]['st']['size'],
-                'references': p[1]['st']['references'],
+                'isReference': p[1]['st']['isReference'],
                 'varTable': p[1]['st']['varTable']
             }
 
@@ -586,7 +602,7 @@ class Parser:
             'info': {}
         }
         p[0]['st'] = {
-            'references': [True for i in range(len(p[2]['child_nodes'][0]['info']['id_l']))],
+            'isReference': [True for i in range(len(p[2]['child_nodes'][0]['info']['id_l']))],
             'size': p[2]['st']['size'],
             'varTable': p[2]['st']['varTable']
         }
@@ -600,7 +616,7 @@ class Parser:
             'info': {}
         }
         p[0]['st'] = {
-            'references': [False for i in range(len(p[1]['info']['id_l']))],
+            'isReference': [False for i in range(len(p[1]['info']['id_l']))],
             'size': len(p[1]['info']['id_l']),
             'varTable': []
         }
@@ -1157,7 +1173,7 @@ class Parser:
                         'line': p.slice[1].lineno,
                         'column': self.getColumn(self.input,  p.slice[1].lexpos)
                     })
-                elif self.symbolList['funcID'][p[1]]['references'][i] and not (
+                elif self.symbolList['funcID'][p[1]]['isReference'][i] and not (
                         p[3]['info']['expressions'][i]['child_nodes'][0]['p_length'] == 2 and
                         p[3]['info']['expressions'][i]['child_nodes'][0]['child_nodes'][0]['p_length'] == 2 and
                         p[3]['info']['expressions'][i]['child_nodes'][0]['child_nodes'][0]['child_nodes'][0]['info']['_type'] == 'variable'
