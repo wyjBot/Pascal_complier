@@ -84,8 +84,8 @@ def var_parameter(node):
     '''
     assert node['p_type'] == "var_parameter"
     result = ''
-    type = basic_type(node["value_parameter"]["basic_type"])
-    idlist = idlst(node["value_parameter"]["idlist"])
+    type = basic_type(node["child_nodes"][0]['info']["basic_type"])
+    idlist = idlst(node["child_nodes"][0]["child_nodes"][0])
     for id in idlist:
         result += type + '* '
         result += id

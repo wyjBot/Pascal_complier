@@ -3,7 +3,7 @@ program example(input,output);
           e=2.73;
     var x,y:integer;
         z:array [3..9] of char;
-    function gcd(a,b:integer):integer;
+    function gcd(var a,b:integer):integer;
         begin 
             if b=0 then gcd:=a
             else gcd:=gcd(b, a mod b)

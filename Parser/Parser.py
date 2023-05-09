@@ -557,7 +557,7 @@ class Parser:
                 'p_type': 'parameter_list',
                 'child_nodes': [p[1], p[3]],
                 'info': {
-                    'parameters': p[1]['parameters'] + [p[3]]
+                    'parameters': p[1]['info']['parameters'] + [p[3]]
                 }
             }
             p[0]['st'] = {
@@ -613,7 +613,9 @@ class Parser:
             'p_length': len(p),
             'p_type': 'value_parameter',
             'child_nodes': [p[1], p[3]],
-            'info': {}
+            'info': {
+                'basic_type': p[3]
+            }
         }
         p[0]['st'] = {
             'isReference': [False for i in range(len(p[1]['info']['id_l']))],

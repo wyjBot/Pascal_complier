@@ -76,11 +76,11 @@ def statement(node):
         result += " = "
         result += expression(node["child_nodes"][0])
         result += ";"
-        result += node["ID"]
+        result += node['info']["ID"]
         result += " < "
         result += expression(node["child_nodes"][1])
         result += ";"
-        result += node["ID"]
+        result += node['info']["ID"]
         result += "++"
         result += "){"
         result += statement(node["child_nodes"][2])
@@ -124,7 +124,7 @@ def procedure_call(node):
     result += node["ID"]+'('
     if node['p_length'] == 5:
         result += "{}".format(expression_list(
-            node["expression_list"], for_procedure_call=True, procedure_id=node["ID"]))
+            node["child_nodes"][0], for_procedure_call=True, procedure_id=node['info']["ID"]))
     result += ')'
     return result
 

@@ -26,23 +26,6 @@ def expression_list(node, array_id="", for_array: bool = False, index_depth=0, r
                     if v["id"] == array_id:
                         array_info = v
                 assert array_info != {}
-            elif isinstance(array_id, list):  # for record
-                search_area = symbolTable["varTable"]
-                for i in search_area:
-                    if i["token"] == array_id[0]:
-                        search_area = i["recordTable"]["variables"]
-                        break
-
-                for i in range(1, len(array_id)):
-                    target = array_id[i]  # for b c in a.b.c
-                    for j in search_area:
-                        if target in j["token"]["ids"]:
-                            if j["recordTable"] == None:
-                                array_info = j
-                                break
-                            else:
-                                search_area = j["recordTable"]["variables"]
-                                break
             index = expression(node['info']["expressions"][0])
             start_index = array_info['array']["start"][-1-index_depth]
             if index.isdigit():
@@ -51,7 +34,7 @@ def expression_list(node, array_id="", for_array: bool = False, index_depth=0, r
                 if start_index != 0:
                     index += "-{}".format(str(start_index))
             result += "[{}]".format(index)
-        elif len(node["expressions"]) > 1:
+        elif len(node['info']["expressions"]) > 1:
             tmp_node = copy.deepcopy(node)
             expressionData = tmp_node['info']["expressions"].pop()
             last_expression = copy.deepcopy(node)
@@ -84,7 +67,7 @@ def expression_list(node, array_id="", for_array: bool = False, index_depth=0, r
             if return_list == True:
                 result_list.extend(expression_list(
                     tmp_node, for_array=for_array, return_list=return_list))
-                result_list.append(expression(expression))
+                result_list.append(expression(expressionData))
             else:
                 result += expression_list(tmp_node,
                                                     for_array=for_array, for_procedure_call=for_procedure_call, procedure_id=procedure_id, ardepth=ardepth+1)
@@ -138,7 +121,7 @@ def simple_expression(node):
         result += term(node["child_nodes"][0])
     elif node['p_length'] == 4:
         assert node["child_nodes"][0], "key missing: simple_expression"
-        assert node["ADDOP"], "key missing: ADDOP"
+        assert node['info']["ADDOP"], "key missing: ADDOP"
         assert node["child_nodes"][1], "key missing: term"
         result += simple_expression(node["simple_expression"]) + ' '
         if node['info']["ADDOP"].lower() == "or":
@@ -241,13 +224,12 @@ def variable(node, reference_judge=True):
         result += '.'.join(node['info']["ID"])
     if isinstance(node['info']["ID"], str):
         if domain[-1] != "main":
-            subFunc_table = get_subFunc(domain[-1])#["table"]
+            subFunc_table = get_subFunc(domain[-1])
             # for i, j in enumerate(subFunc_table["variables"]):
             # print(domain[-1])
             if subFunc_table["isReference"] != None:
                 arnum = len(subFunc_table["isReference"])
                 for i in range(arnum):
-                   # if subFunc_table["variables"][i]["token"] == node['info']["ID"]:
                     if subFunc_table["varTable"][i]["id"] == node['info']["ID"]:
                         if subFunc_table["isReference"][i] == True:
                             result += "*"

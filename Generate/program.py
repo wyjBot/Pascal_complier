@@ -36,8 +36,7 @@ def program_body(node):
     result = ""
     result += const_declarations(node["child_nodes"][0])
     result += var_declarations(node["child_nodes"][1])
-    result += subprogram_declarations(
-        node["child_nodes"][2])
+    result += subprogram_declarations(node["child_nodes"][2])
     result += "int main(int argc,char* argv[])"
     domain += ["main"]
     result += '{'
