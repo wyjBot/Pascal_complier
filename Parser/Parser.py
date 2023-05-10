@@ -775,7 +775,14 @@ class Parser:
                 else:
                     var_type = p[1]['info']['var_type']
                     exp_type = p[3]['info']['exp_type']
-                    if exp_type != 'Undefined' and not self.isSafeAssign(exp_type, var_type):
+                    if var_type is None:
+                        self.error.append({
+                            'error': 'Procedure has no return value',
+                            'value': p[1]['info']['ID'],
+                            'line': p.slice[2].lineno,
+                            'column': self.getColumn(self.input, p.slice[2].lexpos)
+                        })
+                    elif exp_type and exp_type != 'Undefined' and not self.isSafeAssign(exp_type, var_type):
                         self.warning.append({
                             'warning': 'Unsafe assignment',
                             'value': exp_type + ' assign to ' + var_type,
@@ -1081,6 +1088,13 @@ class Parser:
                     'ID': p[1]
                 }
             }
+            if p[0]['info']['exp_type'] is None:
+                self.error.append({
+                    'error': 'Procedure has no return value',
+                    'value': p[1],
+                    'line': p.slice[1].lineno,
+                    'column': self.getColumn(self.input, p.slice[1].lexpos)
+                })
             self.errorInProcedureCall(p)
 
     def p_empty(self, p):

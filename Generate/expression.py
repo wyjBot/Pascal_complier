@@ -39,7 +39,7 @@ def expression_list(node, array_id="", for_array: bool = False, index_depth=0, r
             expressionData = tmp_node['info']["expressions"].pop()
             last_expression = copy.deepcopy(node)
             last_expression['info']["expressions"].clear()
-            last_expression['info']["expressions"].append(expression)
+            last_expression['info']["expressions"].append(expressionData)
             tmp = "{}{}".format(
                 expression_list(
                     tmp_node, for_array=for_array, array_id=array_id, index_depth=index_depth+1),
