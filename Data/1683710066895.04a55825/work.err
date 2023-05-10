@@ -1,0 +1,308 @@
+[
+  {
+    "error": "Define ID repeatedly",
+    "value": "x",
+    "line": 2,
+    "column": 5
+  },
+  {
+    "error": "Define ID repeatedly",
+    "value": "y",
+    "line": 2,
+    "column": 8
+  },
+  {
+    "error": "Define function_ID repeatedly",
+    "value": "gcd",
+    "line": 3,
+    "column": 10
+  },
+  {
+    "error": "Define ID repeatedly",
+    "value": "x",
+    "line": 2,
+    "column": 5
+  },
+  {
+    "error": "Define ID repeatedly",
+    "value": "y",
+    "line": 2,
+    "column": 8
+  },
+  {
+    "error": "Define function_ID repeatedly",
+    "value": "gcd",
+    "line": 3,
+    "column": 10
+  },
+  {
+    "error": "Define ID repeatedly",
+    "value": "x",
+    "line": 2,
+    "column": 5
+  },
+  {
+    "error": "Define ID repeatedly",
+    "value": "y",
+    "line": 2,
+    "column": 8
+  },
+  {
+    "error": "Define function_ID repeatedly",
+    "value": "gcd",
+    "line": 3,
+    "column": 10
+  },
+  {
+    "error": "Define ID repeatedly",
+    "value": "x",
+    "line": 2,
+    "column": 5
+  },
+  {
+    "error": "Define ID repeatedly",
+    "value": "y",
+    "line": 2,
+    "column": 8
+  },
+  {
+    "error": "Define function_ID repeatedly",
+    "value": "gcd",
+    "line": 3,
+    "column": 10
+  },
+  {
+    "error": "Define ID repeatedly",
+    "value": "x",
+    "line": 2,
+    "column": 5
+  },
+  {
+    "error": "Define ID repeatedly",
+    "value": "y",
+    "line": 2,
+    "column": 8
+  },
+  {
+    "error": "Define function_ID repeatedly",
+    "value": "gcd",
+    "line": 3,
+    "column": 10
+  },
+  {
+    "error": "Define ID repeatedly",
+    "value": "x",
+    "line": 2,
+    "column": 5
+  },
+  {
+    "error": "Define ID repeatedly",
+    "value": "y",
+    "line": 2,
+    "column": 8
+  },
+  {
+    "error": "Define function_ID repeatedly",
+    "value": "gcd",
+    "line": 3,
+    "column": 10
+  },
+  {
+    "error": "Define ID repeatedly",
+    "value": "x",
+    "line": 2,
+    "column": 5
+  },
+  {
+    "error": "Define ID repeatedly",
+    "value": "y",
+    "line": 2,
+    "column": 8
+  },
+  {
+    "error": "Define function_ID repeatedly",
+    "value": "gcd",
+    "line": 3,
+    "column": 10
+  },
+  {
+    "error": "Define ID repeatedly",
+    "value": "x",
+    "line": 2,
+    "column": 5
+  },
+  {
+    "error": "Define ID repeatedly",
+    "value": "y",
+    "line": 2,
+    "column": 8
+  },
+  {
+    "error": "Define function_ID repeatedly",
+    "value": "gcd",
+    "line": 3,
+    "column": 10
+  },
+  {
+    "error": "Define ID repeatedly",
+    "value": "x",
+    "line": 2,
+    "column": 5
+  },
+  {
+    "error": "Define ID repeatedly",
+    "value": "y",
+    "line": 2,
+    "column": 8
+  },
+  {
+    "error": "Define function_ID repeatedly",
+    "value": "gcd",
+    "line": 3,
+    "column": 10
+  },
+  {
+    "error": "Define ID repeatedly",
+    "value": "x",
+    "line": 2,
+    "column": 5
+  },
+  {
+    "error": "Define ID repeatedly",
+    "value": "y",
+    "line": 2,
+    "column": 8
+  },
+  {
+    "error": "Define function_ID repeatedly",
+    "value": "gcd",
+    "line": 3,
+    "column": 10
+  },
+  {
+    "error": "Define ID repeatedly",
+    "value": "x",
+    "line": 2,
+    "column": 5
+  },
+  {
+    "error": "Define ID repeatedly",
+    "value": "y",
+    "line": 2,
+    "column": 8
+  },
+  {
+    "error": "Define function_ID repeatedly",
+    "value": "gcd",
+    "line": 3,
+    "column": 10
+  },
+  {
+    "error": "Define ID repeatedly",
+    "value": "x",
+    "line": 2,
+    "column": 5
+  },
+  {
+    "error": "Define ID repeatedly",
+    "value": "y",
+    "line": 2,
+    "column": 8
+  },
+  {
+    "error": "Define function_ID repeatedly",
+    "value": "gcd",
+    "line": 3,
+    "column": 10
+  },
+  {
+    "error": "Define ID repeatedly",
+    "value": "x",
+    "line": 2,
+    "column": 5
+  },
+  {
+    "error": "Define ID repeatedly",
+    "value": "y",
+    "line": 2,
+    "column": 8
+  },
+  {
+    "error": "Define function_ID repeatedly",
+    "value": "gcd",
+    "line": 3,
+    "column": 10
+  },
+  {
+    "error": "Define ID repeatedly",
+    "value": "x",
+    "line": 2,
+    "column": 5
+  },
+  {
+    "error": "Define ID repeatedly",
+    "value": "y",
+    "line": 2,
+    "column": 8
+  },
+  {
+    "error": "Define function_ID repeatedly",
+    "value": "gcd",
+    "line": 3,
+    "column": 10
+  },
+  {
+    "error": "Define ID repeatedly",
+    "value": "x",
+    "line": 2,
+    "column": 5
+  },
+  {
+    "error": "Define ID repeatedly",
+    "value": "y",
+    "line": 2,
+    "column": 8
+  },
+  {
+    "error": "Define function_ID repeatedly",
+    "value": "gcd",
+    "line": 3,
+    "column": 10
+  },
+  {
+    "error": "Define ID repeatedly",
+    "value": "x",
+    "line": 2,
+    "column": 5
+  },
+  {
+    "error": "Define ID repeatedly",
+    "value": "y",
+    "line": 2,
+    "column": 8
+  },
+  {
+    "error": "Define function_ID repeatedly",
+    "value": "gcd",
+    "line": 3,
+    "column": 10
+  },
+  {
+    "error": "Define ID repeatedly",
+    "value": "x",
+    "line": 2,
+    "column": 5
+  },
+  {
+    "error": "Define ID repeatedly",
+    "value": "y",
+    "line": 2,
+    "column": 8
+  },
+  {
+    "error": "Define function_ID repeatedly",
+    "value": "gcd",
+    "line": 3,
+    "column": 10
+  }
+]

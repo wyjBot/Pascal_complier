@@ -32,7 +32,7 @@ def compile(pasPth,cPth=None,astPth=None,errPth=None,genAstFil=True,showDebugInf
     print(err)
     with open(errPth,"w+") as fw:
       js.dump(err,fw,indent=2)
-    return False,err
+    return False,err,warn
     #err,abort
   else:
     if pth.exists(errPth):os.remove(errPth)
