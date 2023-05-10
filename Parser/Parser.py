@@ -11,7 +11,6 @@ class Parser:
         self.isInSubFunc = False
         self.error = []
         self.warning = []
-        self.idIndex = 0
         self.symbolTable = None
         self.parser = None
 
@@ -110,16 +109,13 @@ class Parser:
                 'p_type': 'const_declaration',
                 'child_nodes': [p[1], p[5]],
                 'info': {
-                    'id_index': self.idIndex,
                     'values': p[1]['info']['values'] + [{'ID': p[3], 'const_value': p[5]}]
                 }
             }
             newST = {
-                'idIndex': self.idIndex,
                 'id': p[3],
                 'type': p[5]['info']['true_type'],
                 'value': p[5],
-                'isPositive': True if p[5]['info']['true_type'] != 'CHAR' and p[5]['info']['value'] > 0 else False
             }
             p[0]['st'] = p[1]['st'] + [newST]
             self.isRepeatedDefine(p[3], p.slice[3].lineno, p.slice[3].lexpos)
@@ -136,23 +132,19 @@ class Parser:
                     'line': p.slice[2].lineno,
                     'column': self.getColumn(self.input,  p.slice[2].lexpos)
                 })
-            self.idIndex += 1
         else:
             p[0] = {
                 'p_length': len(p),
                 'p_type': 'const_declaration',
                 'child_nodes': [p[3], ],
                 'info': {
-                    'id_index': self.idIndex,
                     'values': [{'ID': p[1], 'const_value': p[3]}]
                 }
             }
             newST = {
-                'idIndex': self.idIndex,
                 'id': p[1],
                 'type': p[3]['info']['true_type'],
                 'value': p[3],
-                'isPositive': True if p[3]['info']['true_type'] != 'CHAR' and p[3]['info']['value'] > 0 else False
             }
             p[0]['st'] = [newST]
             self.isRepeatedDefine(p[1], p.slice[1].lineno, p.slice[1].lexpos)
@@ -169,7 +161,6 @@ class Parser:
                     'line': p.slice[4].lineno,
                     'column': self.getColumn(self.input,  p.slice[4].lexpos)
                 })
-            self.idIndex += 1
 
     def p_const_value(self, p):
         '''const_value : ADDOP NUM  
@@ -245,7 +236,6 @@ class Parser:
             p[0]['st'] = p[1]['st']
             for i in p[3]['info']['id_l']:
                 newST = {
-                    'idIndex': self.idIndex,
                     'id': i,
                     'type': p[5]['st']['type'],
                     'array': {
@@ -262,21 +252,18 @@ class Parser:
                 else:
                     self.symbolList['curSymbol'][i] = newST.copy()
                     self.symbolList['curSymbol'][i]['isConst'] = False
-                self.idIndex += 1
         else:
             p[0] = {
                 'p_length': len(p),
                 'p_type': 'var_declaration',
                 'child_nodes': [p[1], p[3]],
                 'info': {
-                    'id_index': self.idIndex,
                     'values': [{'id_l': p[1], 'type': p[3]}]
                 }
             }
             p[0]['st'] = []
             for i in p[1]['info']['id_l']:
                 newST = {
-                    'idIndex': self.idIndex,
                     'id': i,
                     'type': p[3]['st']['type'],
                     'array': {
@@ -293,7 +280,6 @@ class Parser:
                 else:
                     self.symbolList['curSymbol'][i] = newST.copy()
                     self.symbolList['curSymbol'][i]['isConst'] = False
-                self.idIndex += 1
 
     def p_type(self, p):
         '''type : basic_type
@@ -452,11 +438,9 @@ class Parser:
             'p_type': 'subprogram',
             'child_nodes': [p[1], p[3]],
             'info': {
-                'id': p[1]['st']['idIndex']
             }
         }
         p[0]['st'] = {
-            'inIndex': p[1]['st']['idIndex'],
             'id': p[1]['st']['id'],
             'type': p[1]['st']['type'],
             'size': p[1]['st']['size'],
@@ -479,7 +463,6 @@ class Parser:
                 }
             }
             p[0]['st'] = {
-                'idIndex': self.idIndex,
                 'id': p[2],
                 'type': None,
                 'size': p[3]['st']['size'],
@@ -497,7 +480,6 @@ class Parser:
                 }
             }
             p[0]['st'] = {
-                'idIndex': self.idIndex,
                 'id': p[2],
                 'type': p[5]['st'],
                 'size': p[3]['st']['size'],
@@ -514,7 +496,6 @@ class Parser:
         self.symbolList['funcID'][p[2]] = p[0]['st'].copy()
         self.symbolList['subFuncSymbol'][p[2]] = p[0]['st'].copy()
         self.symbolList['subFuncSymbol'][p[2]]['isConst'] = False
-        self.idIndex += 1
 
     def p_procedure(self, p):
         '''procedure : PROCEDURE'''
@@ -624,7 +605,6 @@ class Parser:
         }
         for i in p[1]['info']['id_l']:
             newST = {
-                'idIndex': self.idIndex,
                 'id': i,
                 'type': p[3]['st'],
                 'array': {
@@ -637,7 +617,6 @@ class Parser:
             p[0]['st']['varTable'] += [newST]
             self.symbolList['subFuncSymbol'][i] = newST.copy()
             self.symbolList['subFuncSymbol'][i]['isConst'] = False
-            self.idIndex += 1
 
     def p_subprogram_body(self, p):
         '''subprogram_body : const_declarations var_declarations compound_statement'''
@@ -1122,12 +1101,13 @@ class Parser:
         pass
 
     def p_error(self, p):
-        self.error.append({
-            'error': 'illegal syntax',
-            'value': p.value,
-            'line': p.lineno,
-            'column': self.getColumn(self.input,  p.lexpos)
-        })
+        if p:
+            self.error.append({
+                'error': 'illegal syntax',
+                'value': p.value,
+                'line': p.lineno,
+                'column': self.getColumn(self.input,  p.lexpos)
+            })
 
     def isRepeatedDefine(self, id, line, lexpos):
         if self.isInSubFunc:
