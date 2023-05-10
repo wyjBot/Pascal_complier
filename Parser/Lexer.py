@@ -59,7 +59,7 @@ class Lexer:
         return t
 
     def t_NUM(self, t):
-        '[0-9]+(.[0-9]+)?'
+        '[0-9]+(\.[0-9]+)?'
         try:
             t.value = int(t.value)
         except ValueError:
@@ -106,6 +106,7 @@ class Lexer:
                 last_cr = -1
             column = token.lexpos - last_cr
             return column
+
         self.error.append({
             'error': 'Lex error',
             'value': t.value[0],
@@ -125,9 +126,6 @@ class Lexer:
             if not tok:
                 break
             print(tok)
-
-
-
 
 # if __name__ == '__main__':
 #     data = open('input.txt').read()
