@@ -10,6 +10,7 @@ def execute(codePth,inPth,outPth=None,binPth=None,timeout=3):
   if not binPth: 
     # No suffix required, compatible with Windows and Linux
     binPth=pth.join(pth.dirname(codePth),pth.basename(codePth).split('.')[0])
+  gccPth="gcc"
   cmd1=f"{gccPth} {codePth} -o {binPth}" # print(cmd1)
   p1=subproc.Popen(cmd1, shell=True,
               stdin=subprocess.PIPE,
@@ -27,11 +28,8 @@ def execute(codePth,inPth,outPth=None,binPth=None,timeout=3):
               stdout=subprocess.PIPE,
               stderr=subprocess.PIPE
     )
-  # p2.stdin.write(open(inPth).read().decode())
-  p2.stdin.write("36 99".encode())
-  p2.wait(timeout=timeout)
-  outputStr=p2.stdout.read()
-  return True, outputStr
+  outStr=p2.communicate(open(inPth).read().encode())
+  return True, (outStr[0]+outStr[1]).decode().strip()
     
 
 if __name__=="__main__":
