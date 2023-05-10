@@ -1,3 +1,6 @@
+import ast
+import json
+
 import pytest
 
 from Parser.Parser import Parser
@@ -14,16 +17,17 @@ class TestLex:
 
     def test_lex_two(self):
         input = open('test/lex_test/test1').read()
-
-        result = ''''''
-
-        assert runALl(input) == result
+        result = open('test/lex_test/result_test1').read()
+        result1 = ast.literal_eval(result)
+        answer = runpaser(input) 
+        assert answer == result1
 
     def test_lex_three(self):
         input = open('test/lex_test/test2').read()
-
-        result = ''''''
-        assert runALl(input) == result
+        result = open('test/lex_test/result_test2').read()
+        result1 = ast.literal_eval(result)
+        answer = runpaser(input)
+        assert answer == result1
 
     def test_lex_four(self):
         input = open('test/lex_test/test3').read()
@@ -85,6 +89,11 @@ def runALl(input):
     data = parser.run(input)
     result = code_generate(data[0], data[1])
     return result
+
+def runpaser(input):
+    parser = Parser()
+    data = parser.run(input)
+    return data[3]
 
 
 
