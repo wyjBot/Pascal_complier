@@ -11,7 +11,7 @@ class Parser:
         self.isInSubFunc = False
         self.error = []
         self.warning = []
-        self.symbolTable = None
+        self.symbolTable = {}
         self.parser = None
 
     def p_programstruct(self, p):
@@ -1203,6 +1203,12 @@ class Parser:
         return column
 
     def run(self, input, **kwargs):
+        self.symbolTable.clear()
+        self.warning.clear()
+        self.error.clear()
+        self.symbolList['curSymbol'].clear()
+        self.symbolList['subFuncSymbol'].clear()
+        self.symbolList['funcID'].clear()
         self.input = input
         lexer = Lexer()
         lexer.build(input)
