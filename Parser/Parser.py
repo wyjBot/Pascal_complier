@@ -681,6 +681,13 @@ class Parser:
                         '_type': 'IF'
                     }
                 }
+                if p[2]['info']['exp_type'] != 'BOOLEAN':
+                    self.error.append({
+                        'error': 'The type of the conditional judgment expression should be Boolean',
+                        'value': 'The conditional judgment expression in IF statement',
+                        'line': p.slice[1].lineno,
+                        'column': self.getColumn(self.input, p.slice[1].lexpos + 3)
+                    })
             elif p[1].upper() == 'FOR':
                 p[0] = {
                     'p_length': len(p),
