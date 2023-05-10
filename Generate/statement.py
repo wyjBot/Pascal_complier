@@ -106,8 +106,7 @@ def statement(node):
         format_string = ""
         var_string = ""
         for i in range(len(var)):
-            format_string += "{}: {}\\n".format(var[i],
-                                                format_tamap[__type[i]])
+            format_string += "{}\\n".format(format_tamap[__type[i]])
             var_string += "{},".format(var[i])
         var_string = var_string[0: -1]
         result += "printf(\"{}\",{})".format(format_string, var_string)

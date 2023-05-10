@@ -24,7 +24,7 @@ def program_head(node):
     assert node['p_type'] == "program_head"
     result = ""
     result+="#include<stdbool.h>\n"
-    result+="#include<stdio.h>\n"
+    result+="#include<stdio.h>\n\n"
     return result
 
 def program_body(node):
