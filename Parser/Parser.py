@@ -1179,7 +1179,7 @@ class Parser:
                 if var_type != 'Undefined' and para_type != 'Undefined' and not self.isSafeAssign(var_type, para_type):
                     self.warning.append({
                         'warning': 'Unsafe assignment',
-                        'value': str(i) + 'th parameter: ' + var_type + ' assign to ' + para_type,
+                        'value': str(i + 1) + 'th parameter: ' + var_type + ' assign to ' + para_type,
                         'line': p.slice[1].lineno,
                         'column': self.getColumn(self.input,  p.slice[1].lexpos)
                     })
@@ -1190,7 +1190,7 @@ class Parser:
                 ):
                     self.error.append({
                         'error': 'Unable to call by reference',
-                        'value': i,
+                        'value': str(i + 1) + 'th parameter',
                         'line': p.slice[1].lineno,
                         'column': self.getColumn(self.input,  p.slice[1].lexpos)
                     })

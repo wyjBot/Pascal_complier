@@ -25,7 +25,6 @@ def compile(pasPth,cPth=None,astPth=None,errPth=None,genAstFil=True,showDebugInf
   ast,symb,warn,err = parser.run(src)
   if showDebugInf and (warn):
     print(warn)
-  result = code_generate(ast,symb)
   if genAstFil:
     with open(astPth,"w+") as fw:
       js.dump(astPth,fw,indent=2)
@@ -37,6 +36,7 @@ def compile(pasPth,cPth=None,astPth=None,errPth=None,genAstFil=True,showDebugInf
     #err,abort
   else:
     if pth.exists(errPth):os.remove(errPth)
+  result = code_generate(ast, symb)
   with open(cPth,"w+") as fw:
     fw.write(result)
   if showDebugInf :
