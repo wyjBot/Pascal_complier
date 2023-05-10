@@ -18,7 +18,9 @@ def execute(codePth,inPth,outPth=None,binPth=None,timeout=3):
     )
   p1.wait()
   binErr=(p1.stdout.read()+b'\n'+p1.stderr.read()).decode().strip()
-  if binErr:print('- 中间代码->机器码 错误',binErr)
+  if binErr:
+    print('- 中间代码->机器码 错误',binErr)
+    return False
   else: print('+ 机器码生成',binPth)
   p2=subproc.Popen(binPth, shell=True,
               stdin=subprocess.PIPE,
@@ -28,8 +30,10 @@ def execute(codePth,inPth,outPth=None,binPth=None,timeout=3):
   # p2.stdin.write(open(inPth).read().decode())
   p2.stdin.write("36 99".encode())
   p2.wait(timeout=timeout)
-  print(p2.stdout.read())
+  outputStr=p2.stdout.read()
+  return True, outputStr
     
 
 if __name__=="__main__":
-  execute(cwd+"/Data/example.c",cwd+"/Data/example.in",cwd+"/Data/example.out")
+  ret=execute(cwd+"/Data/example.c",cwd+"/Data/example.in",cwd+"/Data/example.out")
+  print(ret)
