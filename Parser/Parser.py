@@ -7,7 +7,7 @@ class Parser:
 
     def __init__(self):
         self.input = None
-        self.symbolList = {'curSymbol': {}, 'subFuncSymbol': {}, 'funcID': {}}
+        self.symbolList = {'globalSymbol': {}, 'subFuncSymbol': {}, 'funcID': {}}
         self.isInSubFunc = False
         self.error = []
         self.warning = []
@@ -123,8 +123,8 @@ class Parser:
                 self.symbolList['subFuncSymbol'][p[3]] = newST.copy()
                 self.symbolList['subFuncSymbol'][p[3]]['isConst'] = True
             else:
-                self.symbolList['curSymbol'][p[3]] = newST.copy()
-                self.symbolList['curSymbol'][p[3]]['isConst'] = True
+                self.symbolList['globalSymbol'][p[3]] = newST.copy()
+                self.symbolList['globalSymbol'][p[3]]['isConst'] = True
             if p[4] != '=':
                 self.error.append({
                     'error': 'illegal syntax',
@@ -152,8 +152,8 @@ class Parser:
                 self.symbolList['subFuncSymbol'][p[1]] = newST.copy()
                 self.symbolList['subFuncSymbol'][p[1]]['isConst'] = True
             else:
-                self.symbolList['curSymbol'][p[1]] = newST.copy()
-                self.symbolList['curSymbol'][p[1]]['isConst'] = True
+                self.symbolList['globalSymbol'][p[1]] = newST.copy()
+                self.symbolList['globalSymbol'][p[1]]['isConst'] = True
             if p[2] != '=':
                 self.error.append({
                     'error': 'illegal syntax',
@@ -250,8 +250,8 @@ class Parser:
                     self.symbolList['subFuncSymbol'][i] = newST.copy()
                     self.symbolList['subFuncSymbol'][i]['isConst'] = False
                 else:
-                    self.symbolList['curSymbol'][i] = newST.copy()
-                    self.symbolList['curSymbol'][i]['isConst'] = False
+                    self.symbolList['globalSymbol'][i] = newST.copy()
+                    self.symbolList['globalSymbol'][i]['isConst'] = False
         else:
             p[0] = {
                 'p_length': len(p),
@@ -278,8 +278,8 @@ class Parser:
                     self.symbolList['subFuncSymbol'][i] = newST.copy()
                     self.symbolList['subFuncSymbol'][i]['isConst'] = False
                 else:
-                    self.symbolList['curSymbol'][i] = newST.copy()
-                    self.symbolList['curSymbol'][i]['isConst'] = False
+                    self.symbolList['globalSymbol'][i] = newST.copy()
+                    self.symbolList['globalSymbol'][i]['isConst'] = False
 
     def p_type(self, p):
         '''type : basic_type
@@ -1119,7 +1119,7 @@ class Parser:
                     'column': self.getColumn(self.input,  lexpos)
                 })
         else:
-            if id in self.symbolList['curSymbol'].keys():
+            if id in self.symbolList['globalSymbol'].keys():
                 self.error.append({
                     'error': 'Define ID repeatedly',
                     'value': id,
@@ -1142,8 +1142,8 @@ class Parser:
     def findSymbol(self, id):
         if self.isInSubFunc and id in self.symbolList['subFuncSymbol'].keys():
             return self.symbolList['subFuncSymbol'][id]
-        elif id in self.symbolList['curSymbol'].keys():
-            return self.symbolList['curSymbol'][id]
+        elif id in self.symbolList['globalSymbol'].keys():
+            return self.symbolList['globalSymbol'][id]
         else:
             return False
 
@@ -1206,7 +1206,7 @@ class Parser:
         self.symbolTable.clear()
         self.warning.clear()
         self.error.clear()
-        self.symbolList['curSymbol'].clear()
+        self.symbolList['globalSymbol'].clear()
         self.symbolList['subFuncSymbol'].clear()
         self.symbolList['funcID'].clear()
         self.input = input
