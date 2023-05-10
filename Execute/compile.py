@@ -46,3 +46,5 @@ def compile(pasPth,cPth=None,astPth=None,errPth=None,genAstFil=True,showDebugInf
 
 if __name__=="__main__":
   compile(r"Data\example.pas")
+  compile(r"Data\example.pas")
+  compile(r"Data\example.pas")
