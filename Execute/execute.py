@@ -10,6 +10,8 @@ def execute(codePth,inPth,outPth=None,binPth=None,timeout=3):
   if not binPth: 
     # No suffix required, compatible with Windows and Linux
     binPth=pth.join(pth.dirname(codePth),pth.basename(codePth).split('.')[0])
+  if not outPth: 
+    binPth=pth.join(pth.dirname(codePth),pth.basename(codePth).split('.')[0]+'.out')
   gccPth="gcc"
   cmd1=f"{gccPth} {codePth} -o {binPth}" # print(cmd1)
   p1=subproc.Popen(cmd1, shell=True,
@@ -28,10 +30,13 @@ def execute(codePth,inPth,outPth=None,binPth=None,timeout=3):
               stdout=subprocess.PIPE,
               stderr=subprocess.PIPE
     )
-  outStr=p2.communicate(open(inPth).read().encode())
-  return True, (outStr[0]+outStr[1]).decode().strip()
+  outStr=p2.communicate(open(inPth).read().encode(),timeout=timeout)
+  outStr=(outStr[0]+outStr[1]).decode().strip()
+  with open(outPth,"w+") as fw:
+    fw.write(outStr)
+  return True,outStr
     
 
 if __name__=="__main__":
-  ret=execute(cwd+"/Data/example.c",cwd+"/Data/example.in",cwd+"/Data/example.out")
+  ret=execute(cwd+"/Data/example.c",cwd+"/Data/example.in",cwd+"/Data/example.out",timeout=5)
   print(ret)
