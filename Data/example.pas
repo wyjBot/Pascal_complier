@@ -1,15 +1,11 @@
-program example(input,output);
-    const pi = 3.14;
-          e=2.73;
-    var x,y:integer;
-        z:array [3..9] of char;
-    function gcd(var a,b:integer):integer;
-        begin
-            if b=0 then gcd:=a
-            else gcd:=gcd(b, a mod b)
-        end;
-    begin
-        z[4] := 1;
-        read(x, y);
-        write(gcd(x, y))
-    end.
+Program example(input, output);
+Var x, y : integer;
+Function gcd( a, b : integer) : integer;
+Begin
+  If b = 0 Then gcd := a
+  Else gcd := gcd(b, a Mod b)
+End;
+Begin
+  read(x, y);
+  write(gcd(x, y))
+End.
