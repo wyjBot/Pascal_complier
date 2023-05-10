@@ -128,9 +128,9 @@ class Parser:
             if p[4] != '=':
                 self.error.append({
                     'error': 'illegal syntax',
-                    'value': p[2],
-                    'line': p.slice[2].lineno,
-                    'column': self.getColumn(self.input,  p.slice[2].lexpos)
+                    'value': p[4],
+                    'line': p.slice[4].lineno,
+                    'column': self.getColumn(self.input,  p.slice[4].lexpos)
                 })
         else:
             p[0] = {
@@ -157,9 +157,9 @@ class Parser:
             if p[2] != '=':
                 self.error.append({
                     'error': 'illegal syntax',
-                    'value': p[4],
-                    'line': p.slice[4].lineno,
-                    'column': self.getColumn(self.input,  p.slice[4].lexpos)
+                    'value': p[2],
+                    'line': p.slice[2].lineno,
+                    'column': self.getColumn(self.input,  p.slice[2].lexpos)
                 })
 
     def p_const_value(self, p):
