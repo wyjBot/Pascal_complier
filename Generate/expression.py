@@ -123,7 +123,7 @@ def simple_expression(node):
         assert node["child_nodes"][0], "key missing: simple_expression"
         assert node['info']["ADDOP"], "key missing: ADDOP"
         assert node["child_nodes"][1], "key missing: term"
-        result += simple_expression(node["simple_expression"]) + ' '
+        result += simple_expression(node["child_nodes"][0]) + ' '
         if node['info']["ADDOP"].lower() == "or":
             result += "||"
         else:

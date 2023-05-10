@@ -115,7 +115,7 @@ class Parser:
             newST = {
                 'id': p[3],
                 'type': p[5]['info']['true_type'],
-                'value': p[5],
+                'value': p[5]['info']['value']
             }
             p[0]['st'] = p[1]['st'] + [newST]
             self.isRepeatedDefine(p[3], p.slice[3].lineno, p.slice[3].lexpos)
@@ -144,7 +144,7 @@ class Parser:
             newST = {
                 'id': p[1],
                 'type': p[3]['info']['true_type'],
-                'value': p[3],
+                'value': p[3]['info']['value']
             }
             p[0]['st'] = [newST]
             self.isRepeatedDefine(p[1], p.slice[1].lineno, p.slice[1].lexpos)
@@ -828,22 +828,22 @@ class Parser:
                 'line': p.slice[1].lineno,
                 'column': self.getColumn(self.input, p.slice[1].lexpos)
             })
-        if p[2] is not None:  # 判断若id有下标，id是否为array
-            if not self.findSymbol(p[1])['array']['isArray']:
+        if p[2] is not None:
+            if not self.findSymbol(p[1])['array']['isArray']:  # 判断若id有下标，id是否为array
                 self.error.append({
                     'error': 'subscripted value is not an array',
                     'value': p[1],
                     'line': p.slice[1].lineno,
                     'column': self.getColumn(self.input, p.slice[1].lexpos)
                 })
-            elif len(p[2]['child_nodes'][0]['info']['exp_type']) != self.findSymbol(p[1])['array']['dimension']:
+            elif len(p[2]['child_nodes'][0]['info']['exp_type']) != self.findSymbol(p[1])['array']['dimension']:  # 维度是否一致
                 self.error.append({
                     'error': 'Dimension different',
                     'value': p[1],
                     'line': p.slice[1].lineno,
                     'column': self.getColumn(self.input, p.slice[1].lexpos)
                 })
-        elif 'array' in self.findSymbol(p[1]).keys() and self.findSymbol(p[1])['array']['isArray']:
+        elif 'array' in self.findSymbol(p[1]).keys() and self.findSymbol(p[1])['array']['isArray']:  # 维度是否一致
             self.error.append({
                 'error': 'Dimension different',
                 'value': p[1],
