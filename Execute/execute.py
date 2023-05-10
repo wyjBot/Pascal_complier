@@ -12,7 +12,6 @@ def execute(codePth,inPth,outPth=None,binPth=None,timeout=3):
     binPth=pth.join(pth.dirname(codePth),pth.basename(codePth).split('.')[0])
   if not outPth: 
     outPth=pth.join(pth.dirname(codePth),pth.basename(codePth).split('.')[0]+'.out')
-  gccPth="gcc"
   cmd1=f"{gccPth} {codePth} -o {binPth}" # print(cmd1)
   p1=subproc.Popen(cmd1, shell=True,
               stdin=subprocess.PIPE,
