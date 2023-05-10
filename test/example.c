@@ -1,18 +1,22 @@
+#include<stdbool.h>
 #include<stdio.h>
-void swap(int *m, int *n){
-    int temp;
-    temp = *m;
-    *m = *n;
-    *n = temp;
-    printf("m=%d,n=%d\n",m,n);
-    printf("m=%d,n=%d\n",*m,*n);
+const float pi = 3.14; 
+const float e = 2.73; 
+
+int x, y; 
+char z[7]; 
+
+int gcd(int* a, int* b){
+	if(*b == 0){
+		return *a; 
+	}
+	else{
+		return gcd(b, a % *b); 
+	}
 }
-int main(){
-    int a, b;
-    a = 2;
-    b = 3;
-    printf("交换前：a=%d,b=%d\n",&a,&b);
-    swap(&a, &b);
-    printf("交换后：a=%d,b=%d\n",a,b);
-    printf("交换后：a=%d,b=%d\n",&a,&b);
+
+int main(int argc, char* argv[]){
+	z[1] = 1; 
+	scanf("%d%d", &x, &y); 
+	printf("gcd(&x, &y): %d\n", gcd(&x, &y)); 
 }
