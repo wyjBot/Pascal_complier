@@ -1,3 +1,7 @@
-test(input, output);
-begin
-end.
+program example(input,output);
+    const pi = 3.14;
+          e=2.73;
+    var x,y:integer;
+    begin
+        x := 1.2
+    end.

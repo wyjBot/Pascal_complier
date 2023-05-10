@@ -1,0 +1,4 @@
+[{'column': 6, 'error': 'Lex error', 'line': 2, 'value': '#'},
+ {'column': 5, 'error': 'Lex error', 'line': 4, 'value': '?'},
+ {'column': 6, 'error': 'Lex error', 'line': 4, 'value': '@'},
+ {'column': 4, 'error': 'Lex error', 'line': 5, 'value': '&'}]

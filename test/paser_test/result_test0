@@ -1,0 +1,4 @@
+[{'column': 11,
+  'line': 6,
+  'value': 'REAL assign to INTEGER',
+  'warning': 'Unsafe assignment'}]

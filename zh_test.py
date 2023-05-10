@@ -19,40 +19,44 @@ class TestLex:
         input = open('test/lex_test/test1').read()
         result = open('test/lex_test/result_test1').read()
         result1 = ast.literal_eval(result)
-        answer = runpaser(input) 
+        answer = runpaser_geterror(input) 
         assert answer == result1
 
     def test_lex_three(self):
         input = open('test/lex_test/test2').read()
         result = open('test/lex_test/result_test2').read()
         result1 = ast.literal_eval(result)
-        answer = runpaser(input)
+        answer = runpaser_geterror(input)
         assert answer == result1
 
     def test_lex_four(self):
         input = open('test/lex_test/test3').read()
-
-        result = ''''''
-        assert runALl(input) == result
+        result = open('test/lex_test/result_test3').read()
+        result1 = ast.literal_eval(result)
+        answer = runpaser_geterror(input)
+        assert answer == result1
 
     def test_lex_five(self):
         input = open('test/lex_test/test4').read()
-
-        result = ''''''
-        assert runALl(input) == result
+        result = open('test/lex_test/result_test4').read()
+        result1 = ast.literal_eval(result)
+        answer = runpaser_geterror(input)
+        assert answer == result1
 
     def test_lex_six(self):
         input = open('test/lex_test/test5').read()
-
-        result = ''''''
-        assert runALl(input) == result
+        result = open('test/lex_test/result_test4').read()
+        result1 = ast.literal_eval(result)
+        answer = runpaser_geterror(input)
+        assert answer == result1
 
 class TestPaser:
     def test_paser_one(self):
         input = open('test/paser_test/test0').read()
-
-        result = ''''''
-        assert runALl(input) == result
+        result = open('test/paser_test/result_test0').read()
+        result1 = ast.literal_eval(result)
+        answer = runpaser_getwarning(input)
+        assert answer == result1
 
     def test_paser_two(self):
         input = open('test/paser_test/test1').read()
@@ -90,10 +94,15 @@ def runALl(input):
     result = code_generate(data[0], data[1])
     return result
 
-def runpaser(input):
+def runpaser_geterror(input):
     parser = Parser()
     data = parser.run(input)
     return data[3]
+
+def runpaser_getwarning(input):
+    parser = Parser()
+    data = parser.run(input)
+    return data[2]
 
 
 
