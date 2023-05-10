@@ -88,6 +88,13 @@ class TestPaser:
         result = ''''''
         assert runALl(input) == result
 
+class TestAll:
+    def test_one(self):
+        input = open('test/All_final_test').read()
+        result = open('test/All_final_test_result').read()
+        answer = runALl(input)
+        assert answer == result
+        
 def runALl(input):
     parser = Parser()
     data = parser.run(input)

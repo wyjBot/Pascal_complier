@@ -1,0 +1,26 @@
+#include<stdbool.h>
+#include<stdio.h>
+const float pi = -3.14; 
+
+float x, y; 
+float z[3][4]; 
+
+int gcd(int a, int b){
+	if(b == 0){
+		return a; 
+	}
+	else{
+		return gcd(b, a % b); 
+	}
+}
+
+int main(int argc, char* argv[]){
+	z[1.2 + 2-1][0] = 3; 
+	x = 1; 
+	y = 2; 
+	scanf("%f%f", &x, &y); 
+	for(x = 1; x < 5; x++){
+		printf("3.14: %f\n", 3.14); 
+	}
+	printf("gcd(x, y): %d\n", gcd(x, y)); 
+}
