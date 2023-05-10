@@ -22,4 +22,4 @@ def execute(codePth,inPth,outPth=None,binPth=None,timeout=3):
     )
 
 if __name__=="__main__":
-  execute("./test/example.c","./test/example.in","test/example.out")
+  execute("Data/example.c","./Data/example.in","Data/example.out")

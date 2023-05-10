@@ -1,0 +1,8 @@
+[
+  {
+    "error": "Unable to call by reference",
+    "value": 1,
+    "line": 9,
+    "column": 23
+  }
+]
