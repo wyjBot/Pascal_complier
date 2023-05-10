@@ -855,8 +855,22 @@ class Parser:
                     'error': 'subscripted value is not an array',
                     'value': p[1],
                     'line': p.slice[1].lineno,
-                    'column': self.getColumn(self.input,  p.slice[1].lexpos)
+                    'column': self.getColumn(self.input, p.slice[1].lexpos)
                 })
+            elif len(p[2]['child_nodes'][0]['info']['exp_type']) != self.findSymbol(p[1])['array']['dimension']:
+                self.error.append({
+                    'error': 'Dimension different',
+                    'value': p[1],
+                    'line': p.slice[1].lineno,
+                    'column': self.getColumn(self.input, p.slice[1].lexpos)
+                })
+        elif 'array' in self.findSymbol(p[1]).keys() and self.findSymbol(p[1])['array']['isArray']:
+            self.error.append({
+                'error': 'Dimension different',
+                'value': p[1],
+                'line': p.slice[1].lineno,
+                'column': self.getColumn(self.input, p.slice[1].lexpos)
+            })
 
     def p_id_varpart(self, p):
         '''id_varpart : empty
