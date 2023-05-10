@@ -84,7 +84,7 @@ def runALl(input):
     parser = Parser()
     data = parser.run(input)
     result = code_generate(data[0], data[1])
-    print(result)
+    return result
 
 
 
