@@ -1,0 +1,4 @@
+program test(input, output);
+type x =  array [ ..4] of integer; 
+begin
+end.

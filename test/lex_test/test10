@@ -1,0 +1,4 @@
+program test(input, output);
+type x real;
+begin
+end.
