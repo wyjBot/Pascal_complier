@@ -12,9 +12,9 @@ module.exports = defineConfig({
     devServer: {
         proxy: {
             '/v2': {
-                // target: 'http://localhost:5000',
+                target: 'http://localhost:5000',
                 changeOrigin:true,
-                target: 'http://192.168.234.128:5000',
+                //target: 'http://192.168.234.128:5000',
             },
         },
     },
