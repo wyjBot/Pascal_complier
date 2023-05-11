@@ -42,7 +42,7 @@ def statement(node):
     | ε                                                         | ε
     '''
     global domain
-    if(node == None):
+    if len(node) == 0:
         return ""
     assert node['info']["_type"] in ["variable", "procedure_call", "compound_statement",
                                 "IF", "FOR", "READ", "WRITE", "WHILE"], "_type:{}".format(node['info']["_type"])
@@ -120,7 +120,7 @@ def procedure_call(node):
     """
     assert node['p_type'] == "procedure_call"
     result = ""
-    result += node["ID"]+'('
+    result += node['info']["ID"]+'('
     if node['p_length'] == 5:
         result += "{}".format(expression_list(
             node["child_nodes"][0], for_procedure_call=True, procedure_id=node['info']["ID"]))

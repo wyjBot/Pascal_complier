@@ -5,7 +5,7 @@ def subprogram_declarations(node):
                             |
     '''
     result = ''
-    if node is not None:
+    if 'p_type' in node.keys():
         assert node['p_type'] == "subprogram_declarations"
         for it in node['info']["subprograms"]:
             result += subprogram(it)

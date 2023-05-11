@@ -18,7 +18,7 @@ def expression_list(node, array_id="", for_array: bool = False, index_depth=0, r
                 else:
                     func_variable_list += symbolTable["varTable"]
                     func_variable_list += get_subFunc(
-                        domain[-1])["table"]["variables"]
+                        domain[-1])["varTable"]
                 array_info = {}
                 # print("\narray_id:", array_id)
                 for v in func_variable_list:
