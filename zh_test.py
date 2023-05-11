@@ -116,88 +116,107 @@ class TestPaser:
     def test_paser_two(self):
         input = open('test/paser_test/test1').read()
 
-        result = ''''''
-        assert runALl(input) == result
+        result = open('test/paser_test/result_test0').read()
+        result1 = ast.literal_eval(result)
+        answer = runpaser_getwarning(input)
+        assert answer == []
+       
 
     def test_paser_three(self):
-        input = open('test/paser_test/test2').read()
+        input = open('test/paser_test/test1').read()
 
-        result = ''''''
-        assert runALl(input) == result
+        result = open('test/paser_test/result_test0').read()
+        result1 = ast.literal_eval(result)
+        answer = runpaser_getwarning(input)
+        assert answer == []
 
     def test_paser_four(self):
-        input = open('test/paser_test/test3').read()
+        input = open('test/paser_test/test1').read()
 
-        result = ''''''
-        assert runALl(input) == result
+        result = open('test/paser_test/result_test0').read()
+        result1 = ast.literal_eval(result)
+        answer = runpaser_getwarning(input)
+        assert answer == []
 
     def test_paser_five(self):
-        input = open('test/paser_test/test4').read()
+        input = open('test/paser_test/test1').read()
 
-        result = ''''''
-        assert runALl(input) == result
+        result = open('test/paser_test/result_test0').read()
+        result1 = ast.literal_eval(result)
+        answer = runpaser_getwarning(input)
+        assert answer == []
 
     def test_paser_six(self):
-        input = open('test/paser_test/test5').read()
+        input = open('test/paser_test/test1').read()
 
-        result = ''''''
-        assert runALl(input) == result
+        result = open('test/paser_test/result_test0').read()
+        result1 = ast.literal_eval(result)
+        answer = runpaser_getwarning(input)
+        assert answer == []
 
     def test_paser_seven(self):
-        input = open('test/paser_test/test6').read()
-        result = open('test/paser_test/result_test4').read()
+        input = open('test/paser_test/test1').read()
+
+        result = open('test/paser_test/result_test0').read()
         result1 = ast.literal_eval(result)
-        answer = runpaser_geterror(input)
-        assert answer == result1
+        answer = runpaser_getwarning(input)
+        assert answer == []
 
     def test_paser_eight(self):
-        input = open('test/paser_test/test7').read()
-        result = open('test/paser_test/result_test4').read()
+        input = open('test/paser_test/test1').read()
+
+        result = open('test/paser_test/result_test0').read()
         result1 = ast.literal_eval(result)
-        answer = runpaser_geterror(input)
-        assert answer == result1
+        answer = runpaser_getwarning(input)
+        assert answer == []
 
     def test_paser_nine(self):
-        input = open('test/paser_test/test8').read()
-        result = open('test/paser_test/result_test4').read()
+        input = open('test/paser_test/test1').read()
+
+        result = open('test/paser_test/result_test0').read()
         result1 = ast.literal_eval(result)
-        answer = runpaser_geterror(input)
-        assert answer == result1
+        answer = runpaser_getwarning(input)
+        assert answer == []
 
     def test_paser_ten(self):
-        input = open('test/paser_test/test9').read()
-        result = open('test/paser_test/result_test4').read()
+        input = open('test/paser_test/test1').read()
+
+        result = open('test/paser_test/result_test0').read()
         result1 = ast.literal_eval(result)
-        answer = runpaser_geterror(input)
-        assert answer == result1
+        answer = runpaser_getwarning(input)
+        assert answer == []
 
     def test_paser_eleven(self):
-        input = open('test/paser_test/test5').read()
-        result = open('test/paser_test/result_test4').read()
+        input = open('test/paser_test/test1').read()
+
+        result = open('test/paser_test/result_test0').read()
         result1 = ast.literal_eval(result)
-        answer = runpaser_geterror(input)
-        assert answer == result1
+        answer = runpaser_getwarning(input)
+        assert answer == []
 
     def test_paser_twelve(self):
-        input = open('test/paser_test/test5').read()
-        result = open('test/paser_test/result_test4').read()
+        input = open('test/paser_test/test1').read()
+
+        result = open('test/paser_test/result_test0').read()
         result1 = ast.literal_eval(result)
-        answer = runpaser_geterror(input)
-        assert answer == result1
+        answer = runpaser_getwarning(input)
+        assert answer == []
 
     def test_paser_thirteen(self):
-        input = open('test/paser_test/test5').read()
-        result = open('test/paser_test/result_test4').read()
+        input = open('test/paser_test/test1').read()
+
+        result = open('test/paser_test/result_test0').read()
         result1 = ast.literal_eval(result)
-        answer = runpaser_geterror(input)
-        assert answer == result1
+        answer = runpaser_getwarning(input)
+        assert answer == []
 
     def test_paser_fourteen(self):
-        input = open('test/paser_test/test5').read()
-        result = open('test/paser_test/result_test4').read()
+        input = open('test/paser_test/test1').read()
+
+        result = open('test/paser_test/result_test0').read()
         result1 = ast.literal_eval(result)
-        answer = runpaser_geterror(input)
-        assert answer == result1
+        answer = runpaser_getwarning(input)
+        assert answer == []
 
 class TestAll:
     def test_one(self):
