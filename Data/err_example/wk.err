@@ -1,8 +1,26 @@
 [
   {
-    "error": "illegal syntax",
-    "value": "(",
-    "line": 6,
-    "column": 14
+    "error": "The number of parameters does not match in function call",
+    "value": "gcd",
+    "line": 11,
+    "column": 23
+  },
+  {
+    "error": "The type of the conditional judgment expression should be Boolean",
+    "value": "The conditional judgment expression in IF statement",
+    "line": 10,
+    "column": 16
+  },
+  {
+    "error": "Dimension different",
+    "value": "z",
+    "line": 14,
+    "column": 9
+  },
+  {
+    "error": "The number of parameters does not match in function call",
+    "value": "gcd",
+    "line": 16,
+    "column": 15
   }
 ]

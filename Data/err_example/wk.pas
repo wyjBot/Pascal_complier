@@ -3,7 +3,7 @@ program example(input,output);
           e=2.73;
     var x,y:integer;
         z:array [3..9, 1..3] of char;
-    function (x, y: boolean; var a,b:integer):integer;
+    function gcd(x, y: boolean; var a,b:integer):integer;
         const pi = 3.14;
           e=2.73;
         begin

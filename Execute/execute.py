@@ -37,8 +37,16 @@ def execute(codePth,inPth,outPth=None,binPth=None,timeout=3):
     return True,outStr
   except Exception as e:
     return False,"运行错误(超时):\n"+str(e)
+
+def fromSrc(pasPth,inPth):
+  from Execute.compile import compile
+  ret=compile(pasPth)
+  if not ret[0]: return ret
+  codePth=pasPth.split('.')[0]+".c"
+  return execute(codePth, inPth)
     
 
 if __name__=="__main__":
-  ret=execute(cwd+"/Data/example/wk.c",cwd+"/Data/example/wk.in",cwd+"/Data/example/wk.out",timeout=5)
+  # ret=execute(cwd+"/Data/example/wk.c",cwd+"/Data/example/wk.in",cwd+"/Data/example/wk.out",timeout=5)
+  ret=fromSrc(cwd+"/Data/example/wk.pas",cwd+"/Data/example/wk.in")
   print(ret)
