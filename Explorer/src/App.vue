@@ -19,7 +19,7 @@
             <el-col :span="4">
                 <el-tabs v-model="currentTab" type="card" stretch>
                     <el-tab-pane  v-if="currentTab==='execute'" label="在线运行" name="execute"></el-tab-pane>
-                    <el-tab-pane  v-if="currentTab==='cCode'" label="中间代码" name="cCode"></el-tab-pane>
+                    <el-tab-pane  v-if="currentTab==='cCode'" label="c语言代码" name="cCode"></el-tab-pane>
                     <el-tab-pane  v-if="currentTab==='err'" name="err">
                         <template #label>
                             <el-badge class="errbdg"

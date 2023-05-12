@@ -44,8 +44,7 @@ def compile(pasPth,cPth=None,astPth=None,errPth=None,genAstFil=True,showDebugInf
   #All information writed,Finally return
   return True,ast,result,warn
 
-
 if __name__=="__main__":
   compile(r"Data\example\wk.pas")
   compile(r"Data\example\wk.pas")
-  compile(r"Data\err_example\wk.pas")
+  compile(r"Data\example\wk.pas")

@@ -45,66 +45,47 @@ class TestLex:
 
     def test_lex_six(self):
         input = open('test/lex_test/test5').read()
-        result = open('test/lex_test/result_test4').read()
+        result = open('test/lex_test/result_test5').read()
         result1 = ast.literal_eval(result)
         answer = runpaser_geterror(input)
         assert answer == result1
 
     def test_lex_seven(self):
-        input = open('test/lex_test/test5').read()
-        result = open('test/lex_test/result_test4').read()
+        input = open('test/lex_test/test6').read()
+        result = open('test/lex_test/result_test6').read()
         result1 = ast.literal_eval(result)
         answer = runpaser_geterror(input)
         assert answer == result1
 
     def test_lex_eight(self):
-        input = open('test/lex_test/test5').read()
-        result = open('test/lex_test/result_test4').read()
+        input = open('test/lex_test/test7').read()
+        result = open('test/lex_test/result_test7').read()
         result1 = ast.literal_eval(result)
         answer = runpaser_geterror(input)
         assert answer == result1
 
     def test_lex_nine(self):
-        input = open('test/lex_test/test5').read()
-        result = open('test/lex_test/result_test4').read()
+        input = open('test/lex_test/test8').read()
+        result = open('test/lex_test/result_test8').read()
         result1 = ast.literal_eval(result)
         answer = runpaser_geterror(input)
         assert answer == result1
 
     def test_lex_ten(self):
-        input = open('test/lex_test/test5').read()
-        result = open('test/lex_test/result_test4').read()
+        input = open('test/lex_test/test9').read()
+        result = open('test/lex_test/result_test9').read()
         result1 = ast.literal_eval(result)
         answer = runpaser_geterror(input)
         assert answer == result1
 
     def test_lex_eleven(self):
-        input = open('test/lex_test/test5').read()
-        result = open('test/lex_test/result_test4').read()
+        input = open('test/lex_test/test10').read()
+        result = open('test/lex_test/result_test10').read()
         result1 = ast.literal_eval(result)
         answer = runpaser_geterror(input)
         assert answer == result1
         
-    def test_lex_twelve(self):
-        input = open('test/lex_test/test5').read()
-        result = open('test/lex_test/result_test4').read()
-        result1 = ast.literal_eval(result)
-        answer = runpaser_geterror(input)
-        assert answer == result1
-        
-    def test_lex_thirteen(self):
-        input = open('test/lex_test/test5').read()
-        result = open('test/lex_test/result_test4').read()
-        result1 = ast.literal_eval(result)
-        answer = runpaser_geterror(input)
-        assert answer == result1
-    
-    def test_lex_fourteen(self):
-        input = open('test/lex_test/test5').read()
-        result = open('test/lex_test/result_test4').read()
-        result1 = ast.literal_eval(result)
-        answer = runpaser_geterror(input)
-        assert answer == result1
+   
 class TestPaser:
     def test_paser_one(self):
         input = open('test/paser_test/test0').read()
@@ -116,16 +97,16 @@ class TestPaser:
     def test_paser_two(self):
         input = open('test/paser_test/test1').read()
 
-        result = open('test/paser_test/result_test0').read()
+        result = open('test/paser_test/result_test1').read()
         result1 = ast.literal_eval(result)
         answer = runpaser_getwarning(input)
         assert answer == []
        
 
     def test_paser_three(self):
-        input = open('test/paser_test/test1').read()
+        input = open('test/paser_test/test2').read()
 
-        result = open('test/paser_test/result_test0').read()
+        result = open('test/paser_test/result_test2').read()
         result1 = ast.literal_eval(result)
         answer = runpaser_getwarning(input)
         assert answer == []
@@ -225,6 +206,17 @@ class TestAll:
         answer = runALl(input)
         assert answer == result
         
+    def test_two(self):
+        input = open('test/All_final_test1').read()
+        result = open('test/All_final_test_result1').read()
+        answer = runALl(input)
+        assert answer == result
+        
+    def test_three(self):
+        input = open('test/All_final_test2').read()
+        result = open('test/All_final_test_result2').read()
+        answer = runALl(input)
+        assert answer == result
 def runALl(input):
     parser = Parser()
     data = parser.run(input)

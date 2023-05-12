@@ -1,0 +1,49 @@
+program BubbleSort;
+
+const
+  MaxSize = 100;
+
+var
+  arr: array[1..100] of Integer;
+  size, i: Integer;
+
+procedure Swap(var a, b: Integer);
+var
+  temp: Integer;
+begin
+  temp := a;
+  a := b;
+  b := temp
+end;
+
+procedure BubbleSort(size: Integer);
+var
+  i, j: Integer;
+begin
+  for i := 1 to size - 1 do
+  begin
+    for j := 1 to size - i do
+    begin
+      if arr[j] > arr[j + 1] then
+        Swap(arr[j], arr[j + 1])
+    end;
+  end;
+end;
+
+procedure PrintArray(size: Integer);
+var
+  i: Integer;
+begin
+  for i := 1 to size do
+    write(arr[i])
+end;
+
+begin
+  read(size);
+  for i := 1 to size do
+    read(arr[i]);
+  PrintArray(size);
+  BubbleSort(size);
+  PrintArray(size);
+  write(1)
+end.

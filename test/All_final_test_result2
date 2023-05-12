@@ -1,0 +1,46 @@
+#include<stdbool.h>
+#include<stdio.h>
+
+const int MaxSize = 100; 
+
+int arr[100]; 
+int size, i; 
+
+void Swap(int* a, int* b){
+	int temp; 
+	
+	temp = *a; 
+	*a = *b; 
+	*b = temp; 
+}
+
+void BubbleSort(int size){
+	int i, j; 
+	
+	for(i = 1; i < size - 1; i++){
+		for(j = 1; j < size - i; j++){
+			if(arr[j-1] > arr[j + 1-1]){
+				Swap(&arr[j-1], &arr[j + 1-1]); 
+			}
+		}
+	}
+}
+
+void PrintArray(int size){
+	int i; 
+	
+	for(i = 1; i < size; i++){
+		printf("%d\n", arr[i-1]); 
+	}
+}
+
+int main(int argc, char* argv[]){
+	scanf("%d", &size); 
+	for(i = 1; i < size; i++){
+		scanf("%d", &arr[i-1]); 
+	}
+	PrintArray(size); 
+	BubbleSort(size); 
+	PrintArray(size); 
+	printf("%d\n", 1); 
+}
